@@ -103,7 +103,7 @@ export default function Register() {
                   fontSize: "1.1rem",
                 }}
               >
-                {showPassword ? "🙈" : "👁️"}
+                {showPassword ? "Hide" : "Show"}
               </button>
             </div>
 
