@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const statueImages = [
   "/img/shivaji-maharaj-world-first-golden-temple-in-junnar.avif",
-  "public/img/mla_shard_sonawane_announcing.png",
+  "/img/mla_shard_sonawane_announcing.png",
 ];
 
 const expData = [
@@ -83,17 +83,46 @@ const gmrtStats = [
   { num: "1995", lbl: "Year commissioned · Khodaj" },
 ];
 
+const HERO_HIGHLIGHTS = [
+  { label: "Shivneri Fort",  sub: "Junnar · Maharashtra",   img: "/img/Shivneri_1.jpg" },
+  { label: "Ozar Ganpati",   sub: "Junnar · Ashtavinayaka", img: "/img/ozar_1.jpeg" },
+  { label: "Bhimashankar",   sub: "Sahyadri · Wildlife",    img: "/img/bhimashankar-shiva-temple_4.jpg" },
+  { label: "Malshej Ghat",   sub: "Junnar · Monsoon",       img: "/img/malshej_1.webp" },
+];
+
+const CARD_OFFSETS = [
+  { x: 0,  y: 0,   r: 0,   z: 40, scale: 1    },
+  { x: 18, y: -12, r: 6,   z: 30, scale: 0.93 },
+  { x: 30, y: -22, r: 10,  z: 20, scale: 0.87 },
+  { x: 40, y: -30, r: 14,  z: 10, scale: 0.81 },
+];
+
 export default function Herosection() {
   const [activeExp, setActiveExp] = useState(0);
   const [statueImg, setStatueImg] = useState(0);
   const [showFullNews, setShowFullNews] = useState(false);
   const [visibleItems, setVisibleItems] = useState(new Set());
   const [touchStartX, setTouchStartX] = useState(null);
+  const [heroVisible, setHeroVisible] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
   const navigate = useNavigate();
   const observerRef = useRef(null);
 
+  // Hero entrance animation
+  useEffect(() => {
+    const t = setTimeout(() => setHeroVisible(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Statue image carousel
   useEffect(() => {
     const t = setInterval(() => setStatueImg(i => (i + 1) % statueImages.length), 3500);
+    return () => clearInterval(t);
+  }, []);
+
+  // Stacked card auto-advance
+  useEffect(() => {
+    const t = setInterval(() => setActiveCard(i => (i + 1) % HERO_HIGHLIGHTS.length), 3000);
     return () => clearInterval(t);
   }, []);
 
@@ -147,7 +176,7 @@ export default function Herosection() {
           --bg2: #0A0A0Af7;
           --text: #ffffff;
           --muted: #ffffff;
-          --border: #000000
+          --border: #000000;
           --org-b: rgba(232,82,10,0.2);
         }
 
@@ -159,202 +188,350 @@ export default function Herosection() {
           -webkit-text-size-adjust: 100%;
         }
 
-        /* Reveal */
+        .dj-hero {
+          position: relative;
+          min-height: 92vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 100px 64px 80px;
+          overflow: hidden;
+        }
+
+        .dj-glow1 {
+          position: absolute;
+          top: -120px; right: -120px;
+          width: 700px; height: 700px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(232,82,10,0.13) 0%, transparent 65%);
+          pointer-events: none;
+          animation: dj-pulse 6s ease-in-out infinite;
+        }
+        .dj-glow2 {
+          position: absolute;
+          bottom: -100px; left: -100px;
+          width: 500px; height: 500px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(201,147,12,0.07) 0%, transparent 65%);
+          pointer-events: none;
+          animation: dj-pulse 8s ease-in-out infinite reverse;
+        }
+        .dj-grid {
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(rgba(232,82,10,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(232,82,10,0.04) 1px, transparent 1px);
+          background-size: 80px 80px;
+          pointer-events: none;
+        }
+        .dj-diag {
+          position: absolute;
+          top: 0; right: 200px;
+          width: 1px; height: 100%;
+          background: linear-gradient(to bottom, transparent, rgba(232,82,10,0.18) 30%, rgba(232,82,10,0.18) 70%, transparent);
+          pointer-events: none;
+          transform: rotate(8deg) scaleY(1.3);
+          transform-origin: top center;
+        }
+
+        @keyframes dj-pulse {
+          0%, 100% { opacity: 0.7; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.06); }
+        }
+
+        .dj-inner {
+          position: relative; z-index: 2;
+          max-width: 1100px; width: 100%;
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .dj-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 14px;
+          border: 1px solid rgba(232,82,10,0.35);
+          border-radius: 20px;
+          background: rgba(232,82,10,0.08);
+          color: var(--org);
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          margin-bottom: 28px;
+          opacity: 0;
+          transform: translateY(16px);
+          transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+        }
+        .dj-badge.vis { opacity: 1; transform: translateY(0); }
+        .dj-badge-dot {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: var(--org);
+          animation: dj-blink 2s ease-in-out infinite;
+        }
+        @keyframes dj-blink {
+          0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+        }
+
+        .dj-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(68px, 10vw, 120px);
+          line-height: 0.92;
+          letter-spacing: 0.04em;
+          color: #fff;
+          margin-bottom: 8px;
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+        }
+        .dj-title.vis { opacity: 1; transform: translateY(0); }
+        .dj-title-accent { display: block; color: var(--org); -webkit-text-stroke: 2px var(--org); }
+        .dj-title-ghost { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.12); }
+
+        .dj-sub {
+          font-size: 15px;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.8;
+          max-width: 520px;
+          margin-top: 22px;
+          margin-bottom: 38px;
+          font-weight: 300;
+          opacity: 0;
+          transform: translateY(18px);
+          transition: opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s;
+        }
+        .dj-sub.vis { opacity: 1; transform: translateY(0); }
+
+        .dj-btns {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-bottom: 52px;
+          opacity: 0;
+          transform: translateY(18px);
+          transition: opacity 0.7s ease 0.45s, transform 0.7s ease 0.45s;
+        }
+        .dj-btns.vis { opacity: 1; transform: translateY(0); }
+
+        .dj-btn-primary {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 13px 28px; background: var(--org); color: #fff;
+          border: none; border-radius: 8px;
+          font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+          letter-spacing: 0.5px; cursor: pointer;
+          transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .dj-btn-primary:hover { background: #ff6b1a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,82,10,0.35); }
+
+        .dj-btn-secondary {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 13px 24px; background: transparent;
+          color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15);
+          border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+          cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .dj-btn-secondary:hover { border-color: rgba(232,82,10,0.5); color: #fff; background: rgba(232,82,10,0.07); }
+
+        .dj-btn-outline {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 13px 24px; background: transparent; color: var(--org);
+          border: 1px solid rgba(232,82,10,0.4); border-radius: 8px;
+          font-family: 'DM Sans', sans-serif; font-size: 14px;
+          cursor: pointer; transition: background 0.2s, border-color 0.2s;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .dj-btn-outline:hover { background: rgba(232,82,10,0.1); border-color: var(--org); }
+
+        .dj-stats {
+          display: flex; gap: 32px; flex-wrap: wrap;
+          opacity: 0; transform: translateY(14px);
+          transition: opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s;
+        }
+        .dj-stats.vis { opacity: 1; transform: translateY(0); }
+        .dj-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--org); line-height: 1; letter-spacing: 1px; }
+        .dj-stat-lbl { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; margin-top: 3px; }
+        .dj-stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.08); align-self: center; }
+
+        /* ── STACKED CARD RIGHT PANEL ── */
+        .dj-right {
+          position: relative;
+          width: 420px;
+          height: 500px;
+          flex-shrink: 0;
+          opacity: 0;
+          transform: translateX(24px);
+          transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+        }
+        .dj-right.vis { opacity: 1; transform: translateX(0); }
+
+        .dj-place-card {
+          position: absolute;
+          width: 320px;
+          height: 370px;
+          border-radius: 18px;
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+          -webkit-tap-highlight-color: transparent;
+        }
+        .dj-place-card img {
+          width: 100%; height: 100%;
+          object-fit: cover; display: block;
+        }
+        .dj-place-card-label {
+          position: absolute; bottom: 0; left: 0; right: 0;
+          padding: 40px 14px 14px;
+          background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
+        }
+        .dj-place-card-sub {
+          font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+          color: rgba(255,255,255,0.45); margin-bottom: 4px;
+        }
+        .dj-place-card-name {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 20px; color: #fff; letter-spacing: 1px; line-height: 1.15;
+        }
+
+        .dj-card-dots {
+          position: absolute;
+          bottom: -28px; left: 0; right: 0;
+          display: flex; justify-content: center; gap: 6px;
+        }
+        .dj-card-dot {
+          height: 5px; border-radius: 3px;
+          background: rgba(255,255,255,0.2);
+          cursor: pointer;
+          transition: background 0.3s, width 0.3s;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .dj-card-dot.on { background: #E8520A; }
+
+        .dj-scroll {
+          position: absolute;
+          bottom: 32px; left: 50%;
+          transform: translateX(-50%);
+          display: flex; flex-direction: column; align-items: center; gap: 8px;
+          color: rgba(255,255,255,0.2); font-size: 10px;
+          letter-spacing: 3px; text-transform: uppercase;
+          opacity: 0; animation: dj-scrollfade 1s ease 1.2s forwards;
+        }
+        @keyframes dj-scrollfade { to { opacity: 1; } }
+        .dj-scroll-line {
+          width: 1px; height: 36px;
+          background: linear-gradient(to bottom, rgba(232,82,10,0.6), transparent);
+          animation: dj-scrollline 1.6s ease-in-out infinite;
+        }
+        @keyframes dj-scrollline {
+          0%   { transform: scaleY(0); transform-origin: top; }
+          50%  { transform: scaleY(1); transform-origin: top; }
+          51%  { transform: scaleY(1); transform-origin: bottom; }
+          100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        @media (max-width: 900px) {
+          .dj-hero { padding: 80px 40px 70px; min-height: auto; }
+          .dj-inner { grid-template-columns: 1fr; gap: 48px; }
+          .dj-right { margin: 0 auto; }
+          .dj-scroll { display: none; }
+        }
+        @media (max-width: 640px) {
+          .dj-hero { padding: 70px 18px 56px; }
+          .dj-title { font-size: clamp(56px, 16vw, 80px); }
+          .dj-btns { gap: 10px; }
+          .dj-btn-primary, .dj-btn-secondary, .dj-btn-outline { padding: 11px 18px; font-size: 13px; }
+          .dj-stats { gap: 20px; }
+          .dj-stat-num { font-size: 26px; }
+        }
+
+        .dj-divider {
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(232,82,10,0.25) 30%, rgba(232,82,10,0.25) 70%, transparent);
+          margin: 0 64px;
+        }
+        @media (max-width: 640px) { .dj-divider { margin: 0 18px; } }
+
         .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .rv.on { opacity: 1; transform: translateY(0); }
 
-        /* ── Shared section wrapper ── */
         .sec { padding: 80px 64px; }
         .sec-alt { background: var(--bg2); }
 
-        .stag {
-          display: block; font-size: 10px; letter-spacing: 4px;
-          text-transform: uppercase; color: var(--org); margin-bottom: 14px;
-        }
-        .stitle {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(28px, 5vw, 52px);
-          font-weight: 700; line-height: 1.15; color: var(--text);
-        }
+        .stag { display: block; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--org); margin-bottom: 14px; }
+        .stitle { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--text); }
         .stitle em { font-style: italic; color: rgba(240,235,224,0.38); }
-        .slead {
-          font-size: 14px; color: var(--muted); line-height: 1.85;
-          max-width: 620px; margin-top: 14px; font-weight: 300;
-        }
+        .slead { font-size: 14px; color: var(--muted); line-height: 1.85; max-width: 620px; margin-top: 14px; font-weight: 300; }
 
-        /* ═══════════════════════
-           NEWS CARD
-        ═══════════════════════ */
         .news-wrap { padding: 60px 64px; }
         .news-head { text-align: center; margin-bottom: 36px; }
 
         .ncard {
-          background: rgba(240,235,224,0.03);
-          border: 1px solid var(--org-b);
+          background: rgba(240,235,224,0.03); border: 1px solid var(--org-b);
           border-radius: 20px; overflow: hidden;
           max-width: 860px; margin: 0 auto;
           display: grid; grid-template-columns: 300px 1fr;
         }
-
-        .nimg {
-          position: relative; overflow: hidden;
-          min-height: 280px; background: #0d0d0d;
-          user-select: none; touch-action: pan-y;
-        }
-        .nimg img {
-          position: absolute; inset: 0; width: 100%; height: 100%;
-          object-fit: cover; transition: opacity 0.7s ease;
-        }
+        .nimg { position: relative; overflow: hidden; min-height: 280px; background: #0d0d0d; user-select: none; touch-action: pan-y; }
+        .nimg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.7s ease; }
         .nimg img.off { opacity: 0; pointer-events: none; }
         .nimg img.on  { opacity: 1; }
-
-        .narr {
-          position: absolute; top: 50%; transform: translateY(-50%);
-          background: rgba(0,0,0,0.55); border: none; color: #fff;
-          width: 32px; height: 32px; border-radius: 50%; font-size: 16px;
-          cursor: pointer; z-index: 5;
-          display: flex; align-items: center; justify-content: center;
-          transition: background 0.2s; -webkit-tap-highlight-color: transparent;
-        }
+        .narr { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.55); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: background 0.2s; -webkit-tap-highlight-color: transparent; }
         .narr:hover { background: rgba(232,82,10,0.75); }
         .narr-l { left: 10px; }
         .narr-r { right: 10px; }
-
-        .ndots {
-          position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-          display: flex; gap: 6px; z-index: 5;
-        }
-        .ndot {
-          height: 6px; width: 6px; border-radius: 3px;
-          background: rgba(255,255,255,0.3); cursor: pointer;
-          transition: background 0.3s, width 0.3s;
-          -webkit-tap-highlight-color: transparent;
-        }
+        .ndots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
+        .ndot { height: 6px; width: 6px; border-radius: 3px; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.3s, width 0.3s; -webkit-tap-highlight-color: transparent; }
         .ndot.on { background: var(--org); width: 18px; }
-
-        .nbody {
-          padding: 26px 24px;
-          display: flex; flex-direction: column;
-          justify-content: space-between; gap: 14px;
-        }
-        .nlabel {
-          font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-          color: var(--org); margin-bottom: 8px;
-        }
-        .nhead {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(15px, 2.2vw, 20px);
-          font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 10px;
-        }
+        .nbody { padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+        .nlabel { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--org); margin-bottom: 8px; }
+        .nhead { font-family: 'Playfair Display', serif; font-size: clamp(15px, 2.2vw, 20px); font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 10px; }
         .ntext { font-size: 13px; color: var(--muted); line-height: 1.8; }
-        .ntext.clamp {
-          display: -webkit-box; -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical; overflow: hidden;
-        }
-        .nmore {
-          background: none; border: 1px solid rgba(232,82,10,0.4);
-          color: var(--org); padding: 9px 18px; border-radius: 4px;
-          font-family: 'DM Sans', sans-serif; font-size: 11px;
-          letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-          width: fit-content; transition: all 0.2s;
-          -webkit-tap-highlight-color: transparent;
-          flex-shrink: 0;
-        }
+        .ntext.clamp { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+        .nmore { background: none; border: 1px solid rgba(232,82,10,0.4); color: var(--org); padding: 9px 18px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; width: fit-content; transition: all 0.2s; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
         .nmore:hover { background: rgba(232,82,10,0.1); border-color: var(--org); }
 
-        /* ═══════════════════════
-           TIMELINE
-        ═══════════════════════ */
         .tl { position: relative; margin-top: 60px; padding-left: 30px; }
-        .tl::before {
-          content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
-          background: linear-gradient(to bottom, transparent, var(--org) 8%, var(--org) 92%, transparent);
-        }
+        .tl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--org) 8%, var(--org) 92%, transparent); }
         .ti { position: relative; padding: 0 0 48px 38px; }
         .ti:last-child { padding-bottom: 0; }
-        .tdot {
-          position: absolute; left: -6px; top: 8px;
-          width: 12px; height: 12px; border-radius: 50%;
-          background: var(--org); border: 2px solid var(--bg);
-          box-shadow: 0 0 0 4px rgba(232,82,10,0.15);
-        }
+        .tdot { position: absolute; left: -6px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--org); border: 2px solid var(--bg); box-shadow: 0 0 0 4px rgba(232,82,10,0.15); }
         .ticon { font-size: 24px; margin-bottom: 10px; }
         .tera { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--org); margin-bottom: 4px; }
         .tdyn { font-size: 10px; color: rgba(240,235,224,0.28); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-        .ttitle {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(16px, 2.8vw, 21px);
-          color: var(--text); font-weight: 700; margin-bottom: 10px; line-height: 1.3;
-        }
+        .ttitle { font-family: 'Playfair Display', serif; font-size: clamp(16px, 2.8vw, 21px); color: var(--text); font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
         .tbody { font-size: 13px; color: var(--muted); line-height: 1.85; font-weight: 300; max-width: 600px; }
 
-        /* ═══════════════════════
-           GMRT
-        ═══════════════════════ */
-        .gmrt-card {
-          margin-top: 48px; border-radius: 20px; overflow: hidden;
-          background: linear-gradient(135deg, rgba(232,82,10,0.07), rgba(201,147,12,0.04));
-          border: 1px solid var(--org-b);
-          display: grid; grid-template-columns: 1fr 1fr;
-        }
+        .gmrt-card { margin-top: 48px; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(232,82,10,0.07), rgba(201,147,12,0.04)); border: 1px solid var(--org-b); display: grid; grid-template-columns: 1fr 1fr; }
         .gl { padding: 40px 34px; }
-        .gr {
-          padding: 40px 34px; background: rgba(0,0,0,0.25);
-          border-left: 1px solid rgba(232,82,10,0.1);
-        }
+        .gr { padding: 40px 34px; background: rgba(0,0,0,0.25); border-left: 1px solid rgba(232,82,10,0.1); }
         .gtag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-        .gtitle {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(18px, 2.8vw, 25px);
-          font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.3;
-        }
+        .gtitle { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.8vw, 25px); font-weight: 700; color: var(--text); margin-bottom: 14px; line-height: 1.3; }
         .gsub { font-size: 13px; color: var(--muted); line-height: 1.8; }
         .gstats { display: flex; flex-direction: column; gap: 18px; }
         .gstat { border-left: 2px solid rgba(232,82,10,0.4); padding-left: 14px; }
         .gnum { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--text); line-height: 1; letter-spacing: 1px; }
         .glbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
 
-        /* ═══════════════════════
-           ADVENTURES
-        ═══════════════════════ */
         .etabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 38px; }
-        .etab {
-          background: rgba(240,235,224,0.04); border: 1px solid rgba(240,235,224,0.1);
-          padding: 11px 16px; border-radius: 8px; font-size: 13px; color: var(--muted);
-          cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 8px;
-          -webkit-tap-highlight-color: transparent;
-        }
+        .etab { background: rgba(240,235,224,0.04); border: 1px solid rgba(240,235,224,0.1); padding: 11px 16px; border-radius: 8px; font-size: 13px; color: var(--muted); cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 8px; -webkit-tap-highlight-color: transparent; }
         .etab:hover { background: rgba(232,82,10,0.08); border-color: rgba(232,82,10,0.3); color: var(--text); }
         .etab.on { background: rgba(232,82,10,0.14); border-color: rgba(232,82,10,0.5); color: var(--text); }
-
         .ebody { margin-top: 34px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 44px; align-items: start; }
-        .etitle {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(18px, 2.8vw, 24px);
-          font-weight: 700; color: var(--text); margin-bottom: 14px;
-        }
+        .etitle { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.8vw, 24px); font-weight: 700; color: var(--text); margin-bottom: 14px; }
         .etext { font-size: 14px; color: var(--muted); line-height: 1.85; font-weight: 300; }
-
         .ecards { display: flex; flex-direction: column; gap: 12px; }
-        .ecard {
-          background: rgba(240,235,224,0.03); border: 1px solid rgba(240,235,224,0.07);
-          border-radius: 12px; padding: 15px 16px;
-          transition: border-color 0.25s, background 0.25s;
-        }
+        .ecard { background: rgba(240,235,224,0.03); border: 1px solid rgba(240,235,224,0.07); border-radius: 12px; padding: 15px 16px; transition: border-color 0.25s, background 0.25s; }
         .ecard:hover { border-color: rgba(232,82,10,0.3); background: rgba(232,82,10,0.05); }
         .etop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 5px; flex-wrap: wrap; }
         .ename { font-size: 14px; font-weight: 500; color: var(--text); }
-        .elevel {
-          font-size: 10px; letter-spacing: 1px; color: var(--org);
-          background: rgba(232,82,10,0.12); padding: 3px 9px; border-radius: 20px;
-          white-space: nowrap; flex-shrink: 0;
-        }
+        .elevel { font-size: 10px; letter-spacing: 1px; color: var(--org); background: rgba(232,82,10,0.12); padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
         .etime { font-size: 11px; color: rgba(240,235,224,0.3); margin-bottom: 5px; letter-spacing: 1px; }
         .etip { font-size: 12px; color: var(--muted); line-height: 1.6; font-style: italic; }
 
-        /* ═══════════════════════
-           RESPONSIVE — tablet
-        ═══════════════════════ */
         @media (max-width: 900px) {
           .sec { padding: 70px 40px; }
           .news-wrap { padding: 50px 40px; }
@@ -364,54 +541,33 @@ export default function Herosection() {
           .gstats { flex-direction: row; flex-wrap: wrap; gap: 14px; }
           .gstat { min-width: 110px; }
         }
-
-        /* ═══════════════════════
-           RESPONSIVE — mobile
-        ═══════════════════════ */
         @media (max-width: 640px) {
           .sec { padding: 56px 18px; }
           .news-wrap { padding: 44px 18px; }
-
-          /* News card: stacks vertically */
           .ncard { grid-template-columns: 1fr; }
           .nimg { min-height: 210px; }
           .nbody { padding: 20px 16px; gap: 12px; }
           .nhead { font-size: 16px; }
           .ntext { font-size: 12px; }
           .nmore { font-size: 10px; padding: 8px 14px; }
-
-          /* Timeline */
           .tl { padding-left: 20px; }
           .ti { padding: 0 0 38px 26px; }
           .tdot { left: -5px; width: 10px; height: 10px; }
           .ticon { font-size: 20px; }
           .ttitle { font-size: 16px; }
           .tbody { font-size: 13px; }
-
-          /* GMRT on mobile */
           .gmrt-card { grid-template-columns: 1fr; }
           .gstats { flex-direction: row; flex-wrap: wrap; gap: 12px; }
           .gstat { min-width: 100px; }
           .gnum { font-size: 26px; }
-
-          /* Tabs: horizontal scroll */
-          .etabs {
-            flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px;
-            -webkit-overflow-scrolling: touch; scrollbar-width: none;
-          }
+          .etabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
           .etabs::-webkit-scrollbar { display: none; }
           .etab { flex-shrink: 0; font-size: 12px; padding: 9px 13px; }
-
-          /* Exp body: single column */
           .ebody { grid-template-columns: 1fr; gap: 24px; }
           .etext { font-size: 13px; }
           .ecard { padding: 13px 14px; }
           .ename { font-size: 13px; }
         }
-
-        /* ═══════════════════════
-           RESPONSIVE — small phones
-        ═══════════════════════ */
         @media (max-width: 400px) {
           .sec { padding: 44px 14px; }
           .news-wrap { padding: 36px 14px; }
@@ -429,6 +585,112 @@ export default function Herosection() {
 
       <div className="hs-page">
 
+        <section className="dj-hero">
+          <div className="dj-glow1" />
+          <div className="dj-glow2" />
+          <div className="dj-grid" />
+          <div className="dj-diag" />
+
+          <div className="dj-inner">
+            {/* Left: Title + Buttons + Stats */}
+            <div className="dj-left">
+              <div className={`dj-badge${heroVisible ? " vis" : ""}`}>
+                <span className="dj-badge-dot" />
+                Maharashtra's First Tourist Taluka
+              </div>
+
+              <div className={`dj-title${heroVisible ? " vis" : ""}`}>
+                <span>DISCOVER</span>
+                <span className="dj-title-accent">JUNNAR</span>
+                <span className="dj-title-ghost">SAHYADRI</span>
+              </div>
+
+              <p className={`dj-sub${heroVisible ? " vis" : ""}`}>
+                Where forts touch the sky, caves echo with history, and the Sahyadri
+                wilderness stretches to the horizon — 100 km from Pune, a world apart.
+              </p>
+
+              <div className={`dj-btns${heroVisible ? " vis" : ""}`}>
+                <button className="dj-btn-primary" onClick={() => navigate("/places")}>
+                  Explore Places →
+                </button>
+                <button className="dj-btn-secondary" onClick={() => navigate("/map")}>
+                  🗺️ View Map
+                </button>
+                <button className="dj-btn-outline" onClick={() => navigate("/tips")}>
+                  Plan Your Trip
+                </button>
+              </div>
+
+              <div className={`dj-stats${heroVisible ? " vis" : ""}`}>
+                <div className="dj-stat-item">
+                  <div className="dj-stat-num">20+</div>
+                  <div className="dj-stat-lbl">Tourist Places</div>
+                </div>
+                <div className="dj-stat-divider" />
+                <div className="dj-stat-item">
+                  <div className="dj-stat-num">2</div>
+                  <div className="dj-stat-lbl">Ashtavinayaka Temples</div>
+                </div>
+                <div className="dj-stat-divider" />
+                <div className="dj-stat-item">
+                  <div className="dj-stat-num">2000+</div>
+                  <div className="dj-stat-lbl">Years of History</div>
+                </div>
+                <div className="dj-stat-divider" />
+                <div className="dj-stat-item">
+                  <div className="dj-stat-num">1st</div>
+                  <div className="dj-stat-lbl">Tourist Taluka in MH</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Stacked image cards */}
+            <div className={`dj-right${heroVisible ? " vis" : ""}`}>
+              {HERO_HIGHLIGHTS.map((h, i) => {
+                const pos = (i - activeCard + HERO_HIGHLIGHTS.length) % HERO_HIGHLIGHTS.length;
+                const slot = CARD_OFFSETS[pos] ?? { x: 50, y: -38, r: 18, z: 0, scale: 0.76 };
+                return (
+                  <div
+                    key={h.label}
+                    className="dj-place-card"
+                    style={{
+                      transform: `translateX(${slot.x}px) translateY(${slot.y}px) rotate(${slot.r}deg) scale(${slot.scale})`,
+                      zIndex: slot.z,
+                    }}
+                    onClick={() => setActiveCard(i)}
+                  >
+                    <img src={h.img} alt={h.label} />
+                    <div className="dj-place-card-label">
+                      <div className="dj-place-card-sub">{h.sub}</div>
+                      <div className="dj-place-card-name">{h.label}</div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Dots */}
+              <div className="dj-card-dots">
+                {HERO_HIGHLIGHTS.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`dj-card-dot${activeCard === i ? " on" : ""}`}
+                    style={{ width: activeCard === i ? 18 : 5 }}
+                    onClick={() => setActiveCard(i)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="dj-scroll">
+            <div className="dj-scroll-line" />
+            scroll
+          </div>
+        </section>
+
+        <div className="dj-divider" />
+
         {/* ── STATUE ANNOUNCEMENT ── */}
         <div className="news-wrap">
           <div className="news-head">
@@ -439,29 +701,12 @@ export default function Herosection() {
           </div>
 
           <div className="ncard">
-            {/* Swipeable image */}
-            <div
-              className="nimg"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
+            <div className="nimg" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
               {statueImages.map((src, i) => (
-                <img
-                  key={i} src={src}
-                  alt={`Shivaji statue rendering ${i + 1}`}
-                  className={statueImg === i ? "on" : "off"}
-                />
+                <img key={i} src={src} alt={`Shivaji statue rendering ${i + 1}`} className={statueImg === i ? "on" : "off"} />
               ))}
-              <button
-                className="narr narr-l"
-                onClick={() => setStatueImg(i => (i - 1 + statueImages.length) % statueImages.length)}
-                aria-label="Previous"
-              >‹</button>
-              <button
-                className="narr narr-r"
-                onClick={() => setStatueImg(i => (i + 1) % statueImages.length)}
-                aria-label="Next"
-              >›</button>
+              <button className="narr narr-l" onClick={() => setStatueImg(i => (i - 1 + statueImages.length) % statueImages.length)} aria-label="Previous">‹</button>
+              <button className="narr narr-r" onClick={() => setStatueImg(i => (i + 1) % statueImages.length)} aria-label="Next">›</button>
               <div className="ndots">
                 {statueImages.map((_, i) => (
                   <div key={i} className={`ndot${statueImg === i ? " on" : ""}`} onClick={() => setStatueImg(i)} />
@@ -469,7 +714,6 @@ export default function Herosection() {
               </div>
             </div>
 
-            {/* News body */}
             <div className="nbody">
               <div>
                 <div className="nlabel">🏛 Junnar · Heritage Announcement</div>
@@ -511,14 +755,9 @@ export default function Herosection() {
             From Satavahana trade routes to Buddhist monasteries, from Maratha battlefields to
             modern heritage tourism — Junnar has witnessed some of India's most consequential chapters.
           </p>
-
           <div className="tl">
             {timeline.map((item, i) => (
-              <div
-                key={i}
-                className={`ti rv${visibleItems.has(`t${i}`) ? " on" : ""}`}
-                data-reveal={`t${i}`}
-              >
+              <div key={i} className={`ti rv${visibleItems.has(`t${i}`) ? " on" : ""}`} data-reveal={`t${i}`}>
                 <div className="tdot" />
                 <div className="ticon">{item.icon}</div>
                 <div className="tera">{item.era}</div>
@@ -538,11 +777,7 @@ export default function Herosection() {
             Hidden in the quiet hills of Junnar taluka, one of the world's most powerful radio
             telescope arrays listens to the faintest whispers from across the cosmos.
           </p>
-
-          <div
-            className={`gmrt-card rv${visibleItems.has("gmrt") ? " on" : ""}`}
-            data-reveal="gmrt"
-          >
+          <div className={`gmrt-card rv${visibleItems.has("gmrt") ? " on" : ""}`} data-reveal="gmrt">
             <div className="gl">
               <div className="gtag">📡 World-Class Research Facility</div>
               <div className="gtitle">Giant Metrewave Radio Telescope</div>
@@ -582,19 +817,13 @@ export default function Herosection() {
             The Sahyadri ranges around Junnar offer outdoor experiences for every level — from
             sunrise fort trails to star-lit riverside camping.
           </p>
-
           <div className="etabs">
             {expData.map((e, i) => (
-              <div
-                key={e.id}
-                className={`etab${activeExp === i ? " on" : ""}`}
-                onClick={() => setActiveExp(i)}
-              >
+              <div key={e.id} className={`etab${activeExp === i ? " on" : ""}`} onClick={() => setActiveExp(i)}>
                 <span style={{ fontSize: 16 }}>{e.icon}</span>{e.label}
               </div>
             ))}
           </div>
-
           <div className="ebody">
             <div>
               <div className="etitle">{exp.title}</div>
