@@ -4,7 +4,30 @@ import { getAllPlaces, getPlacesByCategory, searchPlaces } from "../services/api
 import ImageSwiper from "../components/ImageSwiper";
 import { getImagesForPlace } from "../data/placeImages";
 
+// ── Category filter tabs ──────────────────────────────────────────────────────
+// "Heritage" places (Habashi Mahal, Shiv Shrusti) have no filter tab — they
+// always appear under "All". The filter tabs match the DB category values exactly.
 const CATEGORIES = ["All", "Fort", "Temple", "Cave", "Nature", "Dam"];
+
+// ── Badge colours per category ────────────────────────────────────────────────
+const BADGE_COLORS = {
+  Fort:     { bg: "rgba(255,107,0,0.92)",   text: "#fff" },
+  Temple:   { bg: "rgba(251,191,36,0.92)",  text: "#111" },
+  Cave:     { bg: "rgba(139,92,246,0.92)",  text: "#fff" },
+  Nature:   { bg: "rgba(16,185,129,0.92)",  text: "#fff" },
+  Dam:      { bg: "rgba(59,130,246,0.92)",  text: "#fff" },
+  Heritage: { bg: "rgba(236,72,153,0.92)",  text: "#fff" },
+};
+
+// ── Category icons ────────────────────────────────────────────────────────────
+const CATEGORY_ICONS = {
+  All:     "🗺️",
+  Fort:    "🏔️",
+  Temple:  "🛕",
+  Cave:    "🪨",
+  Nature:  "🌿",
+  Dam:     "💧",
+};
 
 export default function Places() {
   const [places, setPlaces]                 = useState([]);
@@ -62,8 +85,8 @@ export default function Places() {
               ...(activeCategory === cat ? styles.filterBtnActive : {}),
             }}
           >
+            <span>{CATEGORY_ICONS[cat]}</span>
             {cat}
-
           </button>
         ))}
       </div>
@@ -100,6 +123,9 @@ export default function Places() {
 function PlaceCard({ place, images, onClick }) {
   const [hovered, setHovered] = useState(false);
 
+  // Badge colour — fallback to orange if category not in map
+  const badgeColor = BADGE_COLORS[place.category] || BADGE_COLORS["Fort"];
+
   return (
     <div
       style={{ ...styles.card, ...(hovered ? styles.cardHovered : {}) }}
@@ -109,7 +135,13 @@ function PlaceCard({ place, images, onClick }) {
       {/* Swipeable image */}
       <div style={styles.cardImgWrap}>
         <ImageSwiper images={images} height="210px" name={place.name} />
-        <span style={styles.categoryBadge}>
+
+        {/* Category badge — coloured by type */}
+        <span style={{
+          ...styles.categoryBadge,
+          background: badgeColor.bg,
+          color: badgeColor.text,
+        }}>
           {place.category}
         </span>
       </div>
@@ -156,7 +188,7 @@ const styles = {
   card:         { background: "#111", border: "1px solid #1e1e1e", borderRadius: "14px", overflow: "hidden", transition: "all 0.3s ease" },
   cardHovered:  { border: "1px solid rgba(255,107,0,0.35)", transform: "translateY(-4px)", boxShadow: "0 12px 32px rgba(0,0,0,0.4)" },
   cardImgWrap:  { position: "relative" },
-  categoryBadge: { position: "absolute", top: "10px", left: "10px", zIndex: 3, background: "rgba(255,107,0,0.92)", color: "#fff", padding: "0.2rem 0.65rem", borderRadius: "4px", fontSize: "0.7rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" },
+  categoryBadge: { position: "absolute", top: "10px", left: "10px", zIndex: 3, padding: "0.2rem 0.65rem", borderRadius: "4px", fontSize: "0.7rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" },
   cardBody:     { padding: "1.2rem" },
   cardTitle:    { color: "#fff", fontSize: "1.05rem", fontWeight: "700", marginBottom: "0.25rem" },
   cardLocation: { color: "#555", fontSize: "0.8rem", marginBottom: "0.6rem" },

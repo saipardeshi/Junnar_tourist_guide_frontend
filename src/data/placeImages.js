@@ -1,7 +1,11 @@
 // src/data/placeImages.js
+//
+// ⚠️  Keys MUST exactly match the `name` field in DataInitializer.java
+//     so that getImagesForPlace() finds images for every place.
 
 export const PLACE_IMAGES = {
-  // ── FORTS ────────────────────────────────────────────────────────────────
+
+  // ── FORTS (7) ────────────────────────────────────────────────────────────
   "Shivneri Fort": [
     "/img/Shivneri_1.jpg",
     "/img/Shivneri_2.webp",
@@ -20,18 +24,6 @@ export const PLACE_IMAGES = {
     "/img/chavand_2.jpeg",
     "/img/chavand_3.jpeg",
   ],
-  "Naneghat Pass": [
-    "/img/naneghat_1.avif",
-    "/img/naneghat_2.jpeg",
-    "/img/naneghat_3.jpg",
-    "/img/naneghat_4.webp",
-  ],
-  "Habashi Mahal": [
-    "/img/Habashi_mahal_1.webp",
-    "/img/Habashi_mahal_2.webp",
-    "/img/Habashi_mahal_3.jpeg",
-    "/img/Habashi_mahal_4.jpeg",
-  ],
   "Sindola Fort (Khireshwar)": [
     "/img/sindola_1.webp",
     "/img/sindola_2.jpeg",
@@ -49,50 +41,13 @@ export const PLACE_IMAGES = {
     "/img/hadsar_4.jpeg",
   ],
 
-  // ── TEMPLES ──────────────────────────────────────────────────────────────
-  "Ozar Ganpati Temple": [
-    "/img/ozar_1.jpeg",
-    "/img/ozar_2.jpg",
-    "/img/ozar_3.jpeg",
-  ],
-  "Kukdeshvar Temple": [
-    "/img/Kukdeshvar_1.jpeg",
-    "/img/Kukdeshvar_2.webp",
-    "/img/Kukdeshvar_3.jpg",
-    "/img/Kukdeshvar_4.webp",
-  ],
-  "Kulswami Khandoba Mandir Vadaj": [
-    "/img/khandoba_1.jpeg",
-    "/img/khandoba_2.jpg",
-  ],
-
-  // ── CAVES ────────────────────────────────────────────────────────────────
-  "Lenyadri Caves": [
-    "/img/Lenyadri_1.jpg",
-    "/img/Lenyadri_2.webp",
-    "/img/Lenyadri_3.jpg",
-    "/img/Lenyadri_4.jpg",
-  ],
-  "Amba Ambika Caves": [
-    "/img/Amba_ambika_caves_junnar_1.webp",
-    "/img/Amba_ambika_caves_junnar_2.jpeg",
-    "/img/Amba_ambika_caves_junnar_3.jpeg",
-    "/img/Amba_ambika_caves_junnar_4.jpeg",
-  ],
-  "The Tulja Caves (Tulja Lena)": [
-    "/img/tulja_caves_1.jpeg",
-    "/img/tulja_caves_2.jpeg",
-    "/img/tulja_caves_3.jpeg",
-    "/img/tulja_caves_4.jpeg",
-
-  ],
-
-  // ── NATURE ───────────────────────────────────────────────────────────────
-  "Bhimashankar Wildlife Sanctuary": [
-    "/img/bhimashankar-shiva-temple_1.jpg",
-    "/img/bhimashankar-shiva-temple_2.jpg",
-    "/img/bhimashankar-shiva-temple_3.jpg",
-    "/img/bhimashankar-shiva-temple_4.jpg",
+  // ── NATURE (incl. Naneghat — was "Naneghat Pass", now "Naneghat") ────────
+  // KEY CHANGED: "Naneghat Pass" → "Naneghat" to match DataInitializer
+  "Naneghat": [
+    "/img/naneghat_1.avif",
+    "/img/naneghat_2.jpeg",
+    "/img/naneghat_3.jpg",
+    "/img/naneghat_4.webp",
   ],
   "Malshej Ghat": [
     "/img/malshej_1.webp",
@@ -108,7 +63,69 @@ export const PLACE_IMAGES = {
     "/img/daryaghat_4.jpeg",
   ],
 
-  // ── DAMS ─────────────────────────────────────────────────────────────────
+  // ── HERITAGE (shows under All) ────────────────────────────────────────────
+  "Habashi Mahal": [
+    "/img/Habashi_mahal_1.webp",
+    "/img/Habashi_mahal_2.webp",
+    "/img/Habashi_mahal_3.jpeg",
+    "/img/Habashi_mahal_4.jpeg",
+  ],
+  // Shiv Shrusti — no images yet, returns [] gracefully via getImagesForPlace
+  "Shiv Shrusti": [
+    "/img/Shiv_Shrusti_2.jpeg",
+    "/img/Shiv_Shrusti_1.jpeg",
+    "/img/Shiv_Shrusti_3.webp",
+    "/img/Shiv_Shrusti_4.jpeg",
+    "/img/Shiv_Shrusti_5.jpeg",
+  ],
+
+  // ── TEMPLES (5) ──────────────────────────────────────────────────────────
+  "Ozar Ganpati Temple": [
+    "/img/ozar_1.jpeg",
+    "/img/ozar_2.jpg",
+    "/img/ozar_3.jpeg",
+  ],
+  "Kukdeshvar Temple": [
+    "/img/Kukdeshvar_1.jpeg",
+    "/img/Kukdeshvar_2.webp",
+    "/img/Kukdeshvar_3.jpg",
+    "/img/Kukdeshvar_4.webp",
+  ],
+  // KEY CHANGED: "Kulswami Khandoba Mandir Vadaj" → "Kulswami Khandoba Mandir"
+  "Kulswami Khandoba Mandir": [
+    "/img/khandoba_1.jpeg",
+    "/img/khandoba_2.jpg",
+  ],
+  // Lenyadri — category changed to Temple in DB, key stays the same
+  "Lenyadri Caves": [
+    "/img/Lenyadri_1.jpg",
+    "/img/Lenyadri_2.webp",
+    "/img/Lenyadri_3.jpg",
+    "/img/Lenyadri_4.jpg",
+  ],
+  // Bhimashankar — category changed to Temple in DB, key stays the same
+  "Bhimashankar Wildlife Sanctuary": [
+    "/img/bhimashankar-shiva-temple_1.jpg",
+    "/img/bhimashankar-shiva-temple_2.jpg",
+    "/img/bhimashankar-shiva-temple_3.jpg",
+    "/img/bhimashankar-shiva-temple_4.jpg",
+  ],
+
+  // ── CAVES (2) ────────────────────────────────────────────────────────────
+  "Amba Ambika Caves": [
+    "/img/Amba_ambika_caves_junnar_1.webp",
+    "/img/Amba_ambika_caves_junnar_2.jpeg",
+    "/img/Amba_ambika_caves_junnar_3.jpeg",
+    "/img/Amba_ambika_caves_junnar_4.jpeg",
+  ],
+  "The Tulja Caves (Tulja Lena)": [
+    "/img/tulja_caves_1.jpeg",
+    "/img/tulja_caves_2.jpeg",
+    "/img/tulja_caves_3.jpeg",
+    "/img/tulja_caves_4.jpeg",
+  ],
+
+  // ── DAMS (6) ─────────────────────────────────────────────────────────────
   "Manikdoh Dam": [
     "/img/manikdoh_1.png",
     "/img/manikdoh_2.jpeg",
@@ -142,29 +159,33 @@ export const PLACE_IMAGES = {
 };
 
 // ── Keyword aliases ───────────────────────────────────────────────────────────
+// Used as fallback when a name doesn't exactly match a key above.
 const ALIASES = {
   "shivneri":         "Shivneri Fort",
-  "lenyadri":         "Lenyadri Caves",
-  "bhimashankar":     "Bhimashankar Wildlife Sanctuary",
-  "ozar":             "Ozar Ganpati Temple",
-  "naneghat":         "Naneghat Pass",
-  "amba ambika":      "Amba Ambika Caves",
-  "habashi":          "Habashi Mahal",
+  "naneghat":         "Naneghat",             // updated — no longer "Naneghat Pass"
   "jivdhan":          "Jivdhan Fort",
-  "kukdeshvar":       "Kukdeshvar Temple",
-  "daryaghat":        "Daryaghat",
   "chavand":          "Chavand Fort",
   "sindola":          "Sindola Fort (Khireshwar)",
   "khireshwar":       "Sindola Fort (Khireshwar)",
   "nimgiri":          "Nimgiri & Hanumantgad",
   "hanumantgad":      "Nimgiri & Hanumantgad",
   "hadsar":           "Hadsar Fort",
-  "khandoba":         "Kulswami Khandoba Mandir Vadaj",
-  "vadaj":            "Kulswami Khandoba Mandir Vadaj",
+  "habashi":          "Habashi Mahal",
+  "shiv shrusti":     "Shiv Shrusti",
+  "shivshrusti":      "Shiv Shrusti",
+  "ozar":             "Ozar Ganpati Temple",
+  "kukdeshvar":       "Kukdeshvar Temple",
+  "khandoba":         "Kulswami Khandoba Mandir",  // updated key
+  "vadaj":            "Kulswami Khandoba Mandir",  // updated key
+  "kulswami":         "Kulswami Khandoba Mandir",  // updated key
+  "lenyadri":         "Lenyadri Caves",
+  "bhimashankar":     "Bhimashankar Wildlife Sanctuary",
+  "amba ambika":      "Amba Ambika Caves",
   "tulja":            "The Tulja Caves (Tulja Lena)",
   "malshej":          "Malshej Ghat",
+  "daryaghat":        "Daryaghat",
   "manikdoh":         "Manikdoh Dam",
-  "wadaj dam":        "Wadaj Dam",
+  "wadaj":            "Wadaj Dam",
   "pimpalgaon":       "Pimpalgaon Joge Dam",
   "yedgaon":          "Yedgaon Dam",
   "dimbhe":           "Dimbhe Dam",
@@ -173,25 +194,25 @@ const ALIASES = {
 
 /**
  * Returns image array for a place name.
- * Priority: 1. Exact match  2. Alias match  3. Fuzzy match
+ * Priority: 1. Exact match  2. Alias match  3. Fuzzy match  4. []
  */
 export function getImagesForPlace(name = "") {
   if (!name) return [];
   const lower = name.trim().toLowerCase();
 
-  // 1. Exact match
+  // 1. Exact match (case-insensitive)
   const exactKey = Object.keys(PLACE_IMAGES).find(k => k.toLowerCase() === lower);
-  if (exactKey) return PLACE_IMAGES[exactKey];
+  if (exactKey) return PLACE_IMAGES[exactKey] || [];
 
   // 2. Alias match
   for (const [alias, key] of Object.entries(ALIASES)) {
     if (lower.includes(alias)) return PLACE_IMAGES[key] || [];
   }
 
-  // 3. Fuzzy match
+  // 3. Fuzzy match — key contains name or name contains key
   const fuzzyKey = Object.keys(PLACE_IMAGES).find(k => {
     const kl = k.toLowerCase();
     return lower.includes(kl) || kl.includes(lower);
   });
-  return fuzzyKey ? PLACE_IMAGES[fuzzyKey] : [];
+  return fuzzyKey ? (PLACE_IMAGES[fuzzyKey] || []) : [];
 }
