@@ -206,7 +206,7 @@ export default function PlaceDetail() {
                 <div style={styles.statLabel}>{s.label}</div>
               </div>
             ))}
-          </div>
+          </div> 
 
           {/* Accordion — click to expand each section */}
           <h3 style={styles.infoHeading}>ℹ️ More Information</h3>

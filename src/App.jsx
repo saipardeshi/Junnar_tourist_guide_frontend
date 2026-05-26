@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
 import MapView from "./components/MapView";
 import Background3D from "./components/Background3D";
+import Hotels from "./pages/Hotels";
 //import HeroSection from "./components/HeroSection";
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/map" element={<MapView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/hotels" element={<Hotels />} />
         </Routes>
 
       </BrowserRouter>
