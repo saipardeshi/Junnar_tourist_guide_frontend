@@ -1,281 +1,181 @@
-// import { useNavigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
-
-// const SEASON_DATA = {
-//   monsoon: { months: [6,7,8,9], label: "Monsoon Season 🌧️", tip: "Perfect for Malshej Ghat waterfalls & lush greenery!", color: "#0ea5e9" },
-//   winter:  { months: [10,11,12,1,2], label: "Winter Season ❄️", tip: "Best time! Visit Shivneri Fort, Lenyadri & Naneghat.", color: "#ff6b00" },
-//   summer:  { months: [3,4,5], label: "Summer Season ☀️", tip: "Early morning visits recommended. Try Ozar Temple & caves.", color: "#f59e0b" },
-// };
-
-// const STATS = [
-//   { number: "6+", label: "Tourist Places" },
-//   { number: "2", label: " 2/8 Ashtavinayak Temple" },
-//   { number: "1st", label: "Tourist Taluka in MH" },
-//   { number: "2000+", label: "Years of History" },
-// ];
-
-// const HIGHLIGHTS = [
-//   { emoji: "🏔️", name: "Shivneri Fort", tag: "Heritage", desc: "Birthplace of Chhatrapati Shivaji Maharaj" },
-//   { emoji: "🦁", name: "Lenyadri", tag: "Heritage and Temple", desc: "One of from eight Ashtavinayak Temples" },
-//   { emoji: "🪨", name: "Ozar Temple", tag: "Temple", desc: "One of from eight Ashtavinayak Temples" },
-//   { emoji: "🌊", name: "Malshej Ghat", tag: "Nature", desc: "Stunning waterfalls & misty valleys" },
-// ];
-
-// function getCurrentSeason() {
-//   const month = new Date().getMonth() + 1;
-//   if (SEASON_DATA.monsoon.months.includes(month)) return SEASON_DATA.monsoon;
-//   if (SEASON_DATA.winter.months.includes(month)) return SEASON_DATA.winter;
-//   return SEASON_DATA.summer;
-// }
-
-// export default function Home() {
-//   const navigate = useNavigate();
-//   const season = getCurrentSeason();
-//   const [visible, setVisible] = useState(false);
-
-//   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
-
-//   return (
-//     <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
-
-//       {/* HERO */}
-//       <section style={styles.hero}>
-//         {/* Background geometric shapes */}
-//         <div style={styles.heroBg1} />
-//         <div style={styles.heroBg2} />
-
-//         <div style={{ ...styles.heroContent, opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)", transition: "all 0.8s ease" }}>
-//           <div style={styles.heroBadge}>
-//             🏆 Maharashtra's First Tourist Taluka
-//           </div>
-//           <h1 style={styles.heroTitle}>
-//             DISCOVER<br />
-//             <span style={styles.heroAccent}>JUNNAR</span>
-//           </h1>
-//           <p style={styles.heroSub}>
-//             Where history meets nature — forts, caves, wildlife & temples<br />
-//             await you in the heart of Sahyadri
-//           </p>
-//           <div style={styles.heroButtons}>
-//             <button style={styles.primaryBtn} onClick={() => navigate("/places")}>
-//               Explore Places →
-//             </button>
-//             <button style={styles.secondaryBtn} onClick={() => navigate("/tips")}>
-//               Plan Your Trip
-//             </button>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* SEASON BANNER */}
-//       <section style={{ ...styles.seasonBanner, borderColor: season.color }}>
-//         <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-//           <span style={{ ...styles.seasonTag, background: season.color }}>{season.label}</span>
-//           <p style={styles.seasonText}>{season.tip}</p>
-//         </div>
-//         <button style={styles.seasonBtn} onClick={() => navigate("/places")}>
-//           See Best Places Now →
-//         </button>
-//       </section>
-
-//       {/* STATS */}
-//       <section style={styles.statsSection}>
-//         {STATS.map((s) => (
-//           <div key={s.label} style={styles.statCard}>
-//             <div style={styles.statNumber}>{s.number}</div>
-//             <div style={styles.statLabel}>{s.label}</div>
-//           </div>
-//         ))}
-//       </section>
-
-//       {/* TOP ATTRACTIONS */}
-//       <section style={styles.section}>
-//         <div style={styles.sectionHeader}>
-//           <h2 style={styles.sectionTitle}>Top <span style={{ color: "#ff6b00" }}>Attractions</span></h2>
-//           <button style={styles.viewAllBtn} onClick={() => navigate("/places")}>View All →</button>
-//         </div>
-//         <div style={styles.highlightGrid}>
-//           {HIGHLIGHTS.map((h, i) => (
-//             <div
-//               key={h.name}
-//               style={{ ...styles.highlightCard, animationDelay: `${i * 0.1}s` }}
-//               onClick={() => navigate("/places")}
-//             >
-//               <div style={styles.highlightEmoji}>{h.emoji}</div>
-//               <span style={styles.highlightTag}>{h.tag}</span>
-//               <h3 style={styles.highlightName}>{h.name}</h3>
-//               <p style={styles.highlightDesc}>{h.desc}</p>
-//               <div style={styles.cardArrow}>→</div>
-//             </div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* ABOUT JUNNAR */}
-//       <section style={styles.aboutSection}>
-//         <div style={styles.aboutLeft}>
-//           <h2 style={styles.sectionTitle}>About <span style={{ color: "#ff6b00" }}>Junnar</span></h2>
-//           <p style={styles.aboutText}>
-//             Junnar is a historic city in Pune district, Maharashtra — declared the state's
-//             <strong style={{ color: "#ff6b00" }}> first tourist taluka</strong>. Home to the
-//             mighty Shivneri Fort (birthplace of Chhatrapati Shivaji Maharaj), ancient
-//             Lenyadri Buddhist caves, and the biodiverse Bhimashankar Wildlife Sanctuary.
-//           </p>
-//           <p style={{ ...styles.aboutText, marginTop: "1rem" }}>
-//             From Ashtavinayaka pilgrimages to Sahyadri treks, Junnar offers a rare blend
-//             of heritage, spirituality, and raw natural beauty — all within 100km of Pune.
-//           </p>
-//           <button style={styles.primaryBtn} onClick={() => navigate("/tips")} >
-//             Plan Your Visit →
-//           </button>
-//         </div>
-//         <div style={styles.aboutRight}>
-//           {["🏯 2000+ years of history", "🦁 Endangered species habitat", "🛕Ashtavinayaka shrines", "🌿 Western Ghats biodiversity (Sahyadri)", "🚵 Trekking & adventure", "🎭 Rich Maratha heritage",].map((item) => (
-//             <div key={item} style={styles.aboutChip}>{item}</div>
-//           ))}
-//         </div>
-//       </section>
-
-//       {/* CTA */}
-//       <section style={styles.ctaSection}>
-//         <h2 style={styles.ctaTitle}>Ready to Explore Junnar?</h2>
-//         <p style={styles.ctaSub}>Create an account to save itineraries and plan your perfect trip</p>
-//         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-//           <button style={styles.primaryBtn} onClick={() => navigate("/register")}>Get Started Free</button>
-//           <button style={styles.secondaryBtn} onClick={() => navigate("/places")}>Browse Places</button>
-//         </div>
-//       </section>
-
-//     </div>
-//   );
-// }
-
-// const styles = {
-//   hero: {
-//     position: "relative", overflow: "hidden",
-//     minHeight: "90vh", display: "flex", alignItems: "center", justifyContent: "center",
-//     padding: "4rem 2rem",
-//   },
-//   heroBg1: {
-//     position: "absolute", top: "-200px", right: "-200px",
-//     width: "600px", height: "600px", borderRadius: "50%",
-//     background: "radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%)",
-//     pointerEvents: "none",
-//   },
-//   heroBg2: {
-//     position: "absolute", bottom: "-150px", left: "-150px",
-//     width: "500px", height: "500px", borderRadius: "50%",
-//     background: "radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 70%)",
-//     pointerEvents: "none",
-//   },
-//   heroContent: { textAlign: "center", maxWidth: "750px", position: "relative", zIndex: 1 },
-//   heroBadge: {
-//     display: "inline-block", padding: "0.4rem 1.2rem",
-//     border: "1px solid rgba(255,107,0,0.4)", borderRadius: "20px",
-//     color: "#ff6b00", fontSize: "0.85rem", marginBottom: "2rem",
-//     background: "rgba(255,107,0,0.08)",
-//   },
-//   heroTitle: {
-//     fontFamily: "'Bebas Neue', sans-serif",
-//     fontSize: "clamp(4rem, 10vw, 7rem)", lineHeight: "0.95",
-//     letterSpacing: "0.05em", color: "#fff", marginBottom: "1.5rem",
-//   },
-//   heroAccent: { color: "#ff6b00", WebkitTextStroke: "2px #ff6b00" },
-//   heroSub: { color: "#888", fontSize: "1.1rem", lineHeight: "1.8", marginBottom: "2.5rem" },
-//   heroButtons: { display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" },
-//   primaryBtn: {
-//     padding: "0.8rem 2rem", background: "#ff6b00", color: "#fff",
-//     border: "none", borderRadius: "8px", fontSize: "1rem",
-//     fontWeight: "600", cursor: "pointer",
-//   },
-//   secondaryBtn: {
-//     padding: "0.8rem 2rem", background: "transparent", color: "#aaa",
-//     border: "1px solid #333", borderRadius: "8px", fontSize: "1rem",
-//     cursor: "pointer",
-//   },
-//   seasonBanner: {
-//     margin: "0 2rem", borderRadius: "12px", padding: "1.2rem 2rem",
-//     background: "#111", border: "1px solid",
-//     display: "flex", justifyContent: "space-between", alignItems: "center",
-//     flexWrap: "wrap", gap: "1rem",
-//   },
-//   seasonTag: {
-//     padding: "0.3rem 0.8rem", borderRadius: "6px",
-//     color: "#fff", fontSize: "0.8rem", fontWeight: "700",
-//     whiteSpace: "nowrap",
-//   },
-//   seasonText: { color: "#ccc", fontSize: "0.95rem" },
-//   seasonBtn: {
-//     background: "transparent", border: "1px solid #333",
-//     color: "#ff6b00", padding: "0.4rem 1rem", borderRadius: "6px",
-//     fontSize: "0.85rem", whiteSpace: "nowrap",
-//   },
-//   statsSection: {
-//     display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-//     gap: "1px", background: "#1a1a1a", margin: "2rem",
-//     borderRadius: "12px", overflow: "hidden", border: "1px solid #1e1e1e",
-//   },
-//   statCard: {
-//     background: "#111", padding: "2rem 1rem", textAlign: "center",
-//   },
-//   statNumber: {
-//     fontFamily: "'Bebas Neue', sans-serif",
-//     fontSize: "2.8rem", color: "#ff6b00", lineHeight: 1,
-//   },
-//   statLabel: { color: "#666", fontSize: "0.8rem", marginTop: "0.3rem", textTransform: "uppercase", letterSpacing: "0.08em" },
-//   section: { padding: "4rem 2rem", maxWidth: "1200px", margin: "0 auto" },
-//   sectionHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" },
-//   sectionTitle: { fontFamily: "'Bebas Neue', sans-serif", fontSize: "2.4rem", letterSpacing: "0.05em" },
-//   viewAllBtn: {
-//     background: "transparent", border: "1px solid #333",
-//     color: "#ff6b00", padding: "0.4rem 1rem", borderRadius: "6px", fontSize: "0.85rem",
-//   },
-//   highlightGrid: {
-//     display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "1rem",
-//   },
-//   highlightCard: {
-//     background: "#111", border: "1px solid #1e1e1e", borderRadius: "12px",
-//     padding: "1.8rem", cursor: "pointer", transition: "all 0.3s ease",
-//     position: "relative", overflow: "hidden",
-//     animation: "fadeInUp 0.6s ease forwards",
-//   },
-//   highlightEmoji: { fontSize: "2.5rem", marginBottom: "1rem" },
-//   highlightTag: {
-//     background: "rgba(255,107,0,0.15)", color: "#ff6b00",
-//     padding: "0.2rem 0.6rem", borderRadius: "4px", fontSize: "0.72rem",
-//     fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.08em",
-//   },
-//   highlightName: { color: "#fff", marginTop: "0.8rem", marginBottom: "0.4rem", fontSize: "1.1rem" },
-//   highlightDesc: { color: "#666", fontSize: "0.88rem", lineHeight: "1.5" },
-//   cardArrow: {
-//     position: "absolute", bottom: "1.5rem", right: "1.5rem",
-//     color: "#ff6b00", fontSize: "1.2rem", opacity: 0.6,
-//   },
-//   aboutSection: {
-//     display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem",
-//     padding: "4rem 2rem", maxWidth: "1200px", margin: "0 auto",
-//     alignItems: "center",
-//   },
-//   aboutLeft: {},
-//   aboutText: { color: "#888", lineHeight: "1.8", marginBottom: "1rem" },
-//   aboutRight: { display: "flex", flexWrap: "wrap", gap: "0.8rem" },
-//   aboutChip: {
-//     background: "#111", border: "1px solid #222", borderRadius: "8px",
-//     padding: "0.7rem 1.1rem", color: "#ccc", fontSize: "0.88rem",
-//   },
-//   ctaSection: {
-//     background: "linear-gradient(135deg, #111 0%, #1a0d00 100%)",
-//     borderTop: "1px solid #1e1e1e", padding: "5rem 2rem", textAlign: "center",
-//   },
-//   ctaTitle: { fontFamily: "'Bebas Neue', sans-serif", fontSize: "3rem", marginBottom: "1rem" },
-//   ctaSub: { color: "#666", marginBottom: "2rem" },
-// };
 import Herosection from "./Herosection";
 
 export default function Home() {
   return (
-    <div>
-      <Herosection />
+    <div style={{ position: "relative", background: "#0a0a0a" }}>
+
+      <style>{`
+  .ft { position: relative; margin-top: 0; }
+  .ft-body { background: #080808; border-top: 1px solid rgba(232,82,10,0.15); padding: 48px 64px 28px; }
+  .ft-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .ft-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; letter-spacing: 3px; }
+  .ft-brand-name span { color: #E8520A; }
+  .ft-brand-sub { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; line-height: 1.7; max-width: 240px; }
+  .ft-col-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #E8520A; margin-bottom: 16px; font-weight: 600; }
+  .ft-links { display: flex; flex-direction: column; gap: 10px; }
+  .ft-link { font-size: 13px; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.2s; text-decoration: none; }
+  .ft-link:hover { color: #fff; }
+  .ft-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .ft-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .ft-copy span { color: #E8520A; }
+  .ft-bottom-links { display: flex; gap: 20px; }
+  .ft-bottom-link { font-size: 11px; color: rgba(255,255,255,0.2); cursor: pointer; transition: color 0.2s; }
+  .ft-bottom-link:hover { color: rgba(255,255,255,0.5); }
+  @media (max-width: 900px) { .ft-grid { grid-template-columns: 1fr 1fr; } .ft-body { padding: 40px 40px 24px; } }
+  @media (max-width: 640px) { .ft-grid { grid-template-columns: 1fr; gap: 28px; } .ft-body { padding: 32px 18px 20px; } .ft-bottom { flex-direction: column; align-items: flex-start; } }
+`}</style>
+      {/* ── Hero background image fading into black ── */}
+      <div style={{
+        position: "absolute",
+        top: 0, left: 0, right: 0,
+        height: "100vh",
+        zIndex: 0,
+        pointerEvents: "none",
+      }}>
+        <img
+          src="/img/malshej_1.webp"
+          alt=""
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            display: "block",
+          }}
+        />
+        {/* fade to black at bottom */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 40%, rgba(10,10,10,0.88) 75%, #0a0a0a 100%)",
+        }} />
+      </div>
+
+      {/* Herosection sits on top */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Herosection />
+      </div>
+
+      {/* ── Pre-footer image section ── */}
+      <div style={{
+        position: "relative",
+        height: "420px",
+        overflow: "hidden",
+        marginTop: "-2px",
+      }}>
+        <img
+          src="/img/malshej_2.webp"
+          alt="Malshej Ghat"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            display: "block",
+          }}
+        />
+        {/* fade in from black at top, fade to black at bottom */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to bottom, #0a0a0a 0%, transparent 25%, transparent 65%, #0a0a0a 100%)",
+        }} />
+        {/* overlay text */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px",
+          padding: "0 1rem",
+          textAlign: "center",
+        }}>
+          <div style={{
+            fontSize: "0.65rem",
+            letterSpacing: "0.3em",
+            color: "#ff6b00",
+            fontWeight: 700,
+            textTransform: "uppercase",
+            fontFamily: "'DM Sans', sans-serif",
+          }}>
+            Sahyadri Awaits
+          </div>
+          <h2 style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "clamp(2rem, 6vw, 4rem)",
+            letterSpacing: "0.06em",
+            color: "#fff",
+            margin: 0,
+            lineHeight: 1,
+            textShadow: "0 2px 20px rgba(0,0,0,0.7)",
+          }}>
+            PLAN YOUR <span style={{ color: "#ff6b00" }}>JOURNEY</span>
+          </h2>
+          <p style={{
+            color: "rgba(255,255,255,0.55)",
+            fontSize: "clamp(0.8rem, 2vw, 1rem)",
+            fontFamily: "'DM Sans', sans-serif",
+            maxWidth: "480px",
+            lineHeight: 1.7,
+            textShadow: "0 1px 8px rgba(0,0,0,0.8)",
+          }}>
+            Forts, caves, temples, dams and monsoon magic — 100 km from Pune.
+          </p>
+        </div>
+      </div>
+{/* ── FOOTER ── */}
+        <footer className="ft">
+          <div className="ft-mountain">
+            <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M0,180 L0,120 L60,80 L120,100 L200,50 L280,90 L340,30 L420,75 L500,20 L580,70 L640,15 L720,60 L800,25 L880,70 L940,35 L1020,75 L1080,40 L1160,80 L1220,35 L1300,70 L1360,45 L1440,75 L1440,180 Z" fill="#2a3a4a" opacity="0.6"/>
+              <path d="M0,180 L0,135 L80,100 L150,120 L220,85 L300,115 L360,75 L440,110 L520,80 L600,115 L660,70 L740,105 L820,85 L900,120 L960,90 L1040,118 L1110,88 L1180,115 L1250,85 L1330,112 L1440,95 L1440,180 Z" fill="#1a2a3a" opacity="0.8"/>
+              <path d="M0,180 L0,155 L30,155 L30,145 L35,135 L40,145 L40,155 L60,155 L60,148 L65,138 L68,130 L71,138 L74,148 L80,148 L80,155 L110,155 L120,140 L130,155 L160,155 L160,148 L165,135 L168,125 L171,135 L174,148 L180,148 L180,155 L220,155 L230,142 L240,155 L270,155 L270,150 L274,140 L277,132 L280,140 L283,150 L290,150 L290,155 L340,155 L340,148 L345,135 L350,125 L355,135 L360,148 L370,148 L370,155 L420,155 L430,143 L440,155 L480,155 L480,150 L484,140 L487,130 L490,140 L493,150 L500,150 L500,155 L560,155 L570,142 L580,155 L620,155 L620,148 L625,136 L628,126 L631,136 L634,148 L640,148 L640,155 L700,155 L710,143 L720,155 L760,155 L760,149 L764,139 L767,129 L770,139 L773,149 L780,149 L780,155 L840,155 L850,142 L860,155 L900,155 L900,148 L905,135 L908,124 L911,135 L914,148 L920,148 L920,155 L980,155 L990,143 L1000,155 L1040,155 L1040,149 L1044,138 L1047,128 L1050,138 L1053,149 L1060,149 L1060,155 L1120,155 L1130,142 L1140,155 L1180,155 L1180,148 L1185,136 L1188,126 L1191,136 L1194,148 L1200,148 L1200,155 L1260,155 L1270,143 L1280,155 L1320,155 L1320,149 L1324,139 L1327,129 L1330,139 L1333,149 L1340,149 L1340,155 L1440,155 L1440,180 Z" fill="#0f1a24"/>
+            </svg>
+          </div>
+          <div className="ft-body">
+            <div className="ft-grid">
+              <div>
+                <div className="ft-brand-name">JUNNAR <span>Guide</span></div>
+                <div className="ft-brand-sub">Maharashtra's First Tourist Taluka — 100 km from Pune, a world of forts, caves, temples and wild Sahyadri landscapes.</div>
+              </div>
+              <div>
+                <div className="ft-col-title">Explore</div>
+                <div className="ft-links">
+                  <a className="ft-link" href="/places">Places</a>
+                  <a className="ft-link" href="/map">Map</a>
+                  <a className="ft-link" href="/events">Events</a>
+                  <a className="ft-link" href="/tips">Travel Tips</a>
+                </div>
+              </div>
+              <div>
+                <div className="ft-col-title">Plan</div>
+                <div className="ft-links">
+                  <a className="ft-link" href="/budget">Budget Planner</a>
+                  <a className="ft-link" href="/tips">Best Time to Visit</a>
+                  <a className="ft-link" href="/map">How to Reach</a>
+                </div>
+              </div>
+              <div>
+                <div className="ft-col-title">Account</div>
+                <div className="ft-links">
+                  <a className="ft-link" href="/login">Login</a>
+                  <a className="ft-link" href="/register">Register</a>
+                  <a className="ft-link" href="/profile">My Trips</a>
+                </div>
+              </div>
+            </div>
+            <div className="ft-bottom">
+              <div className="ft-copy">© 2026 <span>Junnar Tourist Guide</span> · Maharashtra, India</div>
+              <div className="ft-bottom-links">
+                <span className="ft-bottom-link">Privacy Policy</span>
+                <span className="ft-bottom-link">Terms</span>
+                <span className="ft-bottom-link">Contact</span>
+              </div>
+            </div>
+          </div>
+        </footer>
     </div>
   );
 }
