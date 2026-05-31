@@ -79,7 +79,7 @@ export default function ReviewSection({ placeId }) {
         </form>
       ) : (
         <div style={styles.loginPrompt}>
-          <span>🔐</span> <span style={{ color: "#555" }}>Login to write a review</span>
+          <span></span> <span style={{ color: "#555" }}>Login to write a review</span>
         </div>
       )}
 

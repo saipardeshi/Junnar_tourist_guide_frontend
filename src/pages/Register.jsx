@@ -33,10 +33,10 @@ export default function Register() {
           <p style={styles.leftSub}>Start planning your Junnar adventure</p>
           <div style={styles.perks}>
             {[
-              { icon: "🗺️", text: "Save custom itineraries" },
-              { icon: "⭐", text: "Rate & review places" },
-              { icon: "📅", text: "Get event reminders" },
-              { icon: "💡", text: "Personalized trip tips" },
+              { icon: "", text: "Save custom itineraries" },
+              { icon: "", text: "Rate & review places" },
+              { icon: "", text: "Get event reminders" },
+              { icon: "", text: "Personalized trip tips" },
             ].map((p) => (
               <div key={p.text} style={styles.perk}>
                 <span>{p.icon}</span>

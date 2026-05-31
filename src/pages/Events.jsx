@@ -2,39 +2,39 @@ const EVENTS = [
   // {
   //   month: "",
   //   events: [
-  //     { name: "Shivneri Utsav", date: "19 Jan", desc: "Shivaji Maharaj's birth anniversary celebrated at Shivneri Fort with cultural programs, historical re-enactments and thousands of devotees.", tag: "Cultural", icon: "🏯" },
+  //     { name: "Shivneri Utsav", date: "19 Jan", desc: "Shivaji Maharaj's birth anniversary celebrated at Shivneri Fort with cultural programs, historical re-enactments and thousands of devotees.", tag: "Cultural", icon: "" },
   //   ]
   // },
   {
     month: "February",
     events: [
-      { name: " Chhatrapati Shivaji Maharaj Jayanti", desc: "Celebrates the birth of Chhatrapati Shivaji Maharaj ,Honors his bravery, leadership, and vision of Swarajya.", tag: "Festival", icon: "🛕" },
-      { name: "National Science Day (GMRT Khodad)", date: "28 Feb", desc: "Celebrates the discovery of the Raman Effect by C. V. Raman and promotes science and innovation, observed at GMRT Khodad.", tag: "Science", icon: "🔬" },
+      { name: " Chhatrapati Shivaji Maharaj Jayanti", desc: "Celebrates the birth of Chhatrapati Shivaji Maharaj ,Honors his bravery, leadership, and vision of Swarajya.", tag: "Festival", icon: "" },
+      { name: "National Science Day (GMRT Khodad)", date: "28 Feb", desc: "Celebrates the discovery of the Raman Effect by C. V. Raman and promotes science and innovation, observed at GMRT Khodad.", tag: "Science", icon: "" },
     ]
   },
   
   {
     month: "August–September",
     events: [
-      { name: "Ganesh Chaturthi at Ozar", date: "Aug/Sep", desc: "One of the most magnificent Ganesh festivals at Vighnahar Ganpati Temple. Thousands of pilgrims, processions and celebrations.", tag: "Festival", icon: "🛕" },
-      { name: "Ganesh Chaturthi at Lenyadri", date: "Aug/Sep", desc: "Ancient Ashtavinayaka shrine celebration on the hill. Unique atmosphere with Buddhist caves backdrop.", tag: "Festival", icon: "🛕" },
+      { name: "Ganesh Chaturthi at Ozar", date: "Aug/Sep", desc: "One of the most magnificent Ganesh festivals at Vighnahar Ganpati Temple. Thousands of pilgrims, processions and celebrations.", tag: "Festival", icon: "" },
+      { name: "Ganesh Chaturthi at Lenyadri", date: "Aug/Sep", desc: "Ancient Ashtavinayaka shrine celebration on the hill. Unique atmosphere with Buddhist caves backdrop.", tag: "Festival", icon: "" },
     ]
   },
   {
     month: "August–October",
     events: [
-      { name: "Malshej Ghat", date: "Aug/Oct", desc: "At Malshej Ghat, waterfalls look breathtakingly beautiful and create a magical natural view.", tag: "Nature", icon: "🌧️" },
-      { name: "Naneghat Trek ", date: "Aug/Oct", desc: "Peak monsoon waterfall season with fog and reverse waterfall .At Naneghat, the scenery is stunning with dramatic cliffs and ancient caves, making it a truly mesmerizing place.", tag: "Monsoon destination", icon: "🏞️" },
-      { name: "Daryaghat Trek", date: "Aug/Oct", desc: "Famous for reverse waterfall in monsoon with strong winds, offering breathtaking valley views and a thrilling experience.", tag: "Monsoon destination", icon: "🏞️" },
+      { name: "Malshej Ghat", date: "Aug/Oct", desc: "At Malshej Ghat, waterfalls look breathtakingly beautiful and create a magical natural view.", tag: "Nature", icon: "" },
+      { name: "Naneghat Trek ", date: "Aug/Oct", desc: "Peak monsoon waterfall season with fog and reverse waterfall .At Naneghat, the scenery is stunning with dramatic cliffs and ancient caves, making it a truly mesmerizing place.", tag: "Monsoon destination", icon: "" },
+      { name: "Daryaghat Trek", date: "Aug/Oct", desc: "Famous for reverse waterfall in monsoon with strong winds, offering breathtaking valley views and a thrilling experience.", tag: "Monsoon destination", icon: "" },
     ]
   },
   {
     month: "December–January",
     events: [
-      { name: "Shivneri Fort  Trek", date: "Dec–Jan", desc: "Peak trekking season. Clear skies, cool weather, panoramic views of Sahyadri. Thousands of tourists visit.", tag: "Trekking", icon: "🌄" },
-      { name: "Jivdhan Fort Trek", date: "Dec–Jan", desc: "Peak trekking season. Clear skies, cool weather, and thrilling rock patches with stunning Sahyadri views.", tag: "Trekking", icon: "🌄" },
-      { name: "Nimgiri Fort Trek", date: "Dec–Jan", desc: "Ideal winter trek with pleasant climate, scenic hill views, and peaceful surroundings.", tag: "Trekking", icon: "🌄" },
-      { name: "Junnar Heritage Walk", date: "Dec", desc: "Guided walks through Junnar's ancient sites including Buddhist caves, old temples and traditional markets.", tag: "Cultural", icon: "🗺️" },
+      { name: "Shivneri Fort  Trek", date: "Dec–Jan", desc: "Peak trekking season. Clear skies, cool weather, panoramic views of Sahyadri. Thousands of tourists visit.", tag: "Trekking", icon: "" },
+      { name: "Jivdhan Fort Trek", date: "Dec–Jan", desc: "Peak trekking season. Clear skies, cool weather, and thrilling rock patches with stunning Sahyadri views.", tag: "Trekking", icon: "" },
+      { name: "Nimgiri Fort Trek", date: "Dec–Jan", desc: "Ideal winter trek with pleasant climate, scenic hill views, and peaceful surroundings.", tag: "Trekking", icon: "" },
+      { name: "Junnar Heritage Walk", date: "Dec", desc: "Guided walks through Junnar's ancient sites including Buddhist caves, old temples and traditional markets.", tag: "Cultural", icon: "" },
     ]
   },
 ];
@@ -84,7 +84,7 @@ export default function Events() {
                   <div style={styles.eventRight}>
                     <div style={styles.eventHeader}>
                       <h3 style={styles.eventName}>{event.name}</h3>
-                      <span style={styles.eventDate}>📅 {event.date}</span>
+                      <span style={styles.eventDate}> {event.date}</span>
                     </div>
                     <p style={styles.eventDesc}>{event.desc}</p>
                   </div>
@@ -97,7 +97,7 @@ export default function Events() {
 
       {/* Note */}
       <div style={styles.note}>
-        <span style={styles.noteIcon}>ℹ️</span>
+        <span style={styles.noteIcon}>ℹ</span>
         <p style={styles.noteText}>
           Exact dates for festivals like Ganesh Chaturthi vary by Hindu calendar each year.
           Check with local tourism board or call <strong style={{ color: "#ff6b00" }}>1800-200-5885</strong> for confirmed schedules.

@@ -13,17 +13,17 @@ const TYPE_COLORS = {
 };
 
 const TYPE_ICONS = {
-  All:      "🏨",
-  Hotel:    "🏨",
-  Lodge:    "🏕️",
-  Resort:   "🌴",
-  Homestay: "🏡",
+  All:      "",
+  Hotel:    "",
+  Lodge:    "",
+  Resort:   "",
+  Homestay: "",
 };
 
 const MEAL_ICONS = {
-  breakfast: "🍳",
-  lunch:     "🍱",
-  dinner:    "🌙",
+  breakfast: "",
+  lunch:     "",
+  dinner:    "",
 };
 
 export default function Hotels() {
@@ -84,7 +84,7 @@ export default function Hotels() {
         </div>
       ) : filtered.length === 0 ? (
         <div style={s.empty}>
-          <div style={{ fontSize: "3rem" }}>🏨</div>
+          <div style={{ fontSize: "3rem" }}></div>
           <p>No hotels found.</p>
         </div>
       ) : (
@@ -140,7 +140,7 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
           </>
         ) : (
           <div style={s.imgPlaceholder}>
-            <span style={{ fontSize: "4rem" }}>{TYPE_ICONS[hotel.type] || "🏨"}</span>
+            <span style={{ fontSize: "4rem" }}>{TYPE_ICONS[hotel.type] || ""}</span>
           </div>
         )}
 
@@ -150,13 +150,13 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
         </span>
 
         {/* Rating */}
-        <span style={s.ratingBadge}>⭐ {hotel.rating}</span>
+        <span style={s.ratingBadge}>{hotel.rating}</span>
       </div>
 
       {/* ── Card Body ── */}
       <div style={s.body}>
         <h3 style={s.name}>{hotel.name}</h3>
-        <p style={s.address}>📍 {hotel.address}</p>
+        <p style={s.address}> {hotel.address}</p>
 
         {/* Price */}
         <div style={s.priceRow}>
@@ -227,12 +227,12 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
             {/* Meal Details */}
             {meals && (
               <div style={s.section}>
-                <h4 style={s.sectionTitle}>🍽️ Food & Meals</h4>
+                <h4 style={s.sectionTitle}>Food & Meals</h4>
 
                 {/* Cuisine & price */}
                 <div style={s.mealMeta}>
-                  <span style={s.mealMetaItem}>🍴 {meals.cuisineType}</span>
-                  <span style={s.mealMetaItem}>💰 {meals.mealPriceRange}</span>
+                  <span style={s.mealMetaItem}> {meals.cuisineType}</span>
+                  <span style={s.mealMetaItem}> {meals.mealPriceRange}</span>
                 </div>
 
                 {/* Meal tab switcher */}
@@ -265,27 +265,27 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
 
             {/* Contact & Booking */}
             <div style={s.section}>
-              <h4 style={s.sectionTitle}>📞 Contact & Booking</h4>
+              <h4 style={s.sectionTitle}> Contact & Booking</h4>
               <div style={s.contactGrid}>
                 {hotel.phone && (
                   <a href={`tel:${hotel.phone}`} style={s.contactBtn}>
-                    📱 {hotel.phone}
+                     {hotel.phone}
                   </a>
                 )}
                 {hotel.email && (
                   <a href={`mailto:${hotel.email}`} style={s.contactBtn}>
-                    ✉️ {hotel.email}
+                     {hotel.email}
                   </a>
                 )}
                 {hotel.website && (
                   <a href={hotel.website} target="_blank" rel="noopener noreferrer" style={s.contactBtn}>
-                    🌐 Visit Website
+                     Visit Website
                   </a>
                 )}
                 {hotel.googleMapsUrl && (
                   <a href={hotel.googleMapsUrl} target="_blank" rel="noopener noreferrer"
                     style={{ ...s.contactBtn, ...s.mapsBtn }}>
-                    🗺️ Open in Maps
+                     Open in Maps
                   </a>
                 )}
               </div>
@@ -295,7 +295,7 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
                 href={hotel.phone ? `tel:${hotel.phone}` : (hotel.email ? `mailto:${hotel.email}` : "#")}
                 style={s.bookBtn}
               >
-                📞 Book Now — Call Hotel
+                 Book Now — Call Hotel
               </a>
             </div>
 

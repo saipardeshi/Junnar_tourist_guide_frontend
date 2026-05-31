@@ -1,6 +1,6 @@
 const TIPS = [
   {
-    icon: "🚌", title: "How to Reach Junnar",
+    icon: "", title: "How to Reach Junnar",
     items: [
       "From Pune: ST Bus from Shivajinagar Bus Stand (2.5 hrs, ₹150)",
       "From Mumbai: Via kalyan and malshej (4.5 hrs)",
@@ -9,7 +9,7 @@ const TIPS = [
     ]
   },
   {
-    icon: "🍽️", title: "Local Food to Try",
+    icon: "", title: "Local Food to Try",
     items: [
       "Zunka Bhakar — traditional Maharashtrian village food",
       "Jaggery from Junnar — locally produced, famous in region",
@@ -20,7 +20,7 @@ const TIPS = [
     ]
   },
   {
-    icon: "🏨", title: "Where to Stay",
+    icon: "", title: "Where to Stay",
     items: [
       "MTDC Resort near Malshej Ghat (government resort)",
       "Local homestays in Junnar town (budget-friendly)",
@@ -29,7 +29,7 @@ const TIPS = [
     ]
   },
   {
-    icon: "📋", title: "Do's & Don'ts",
+    icon: "", title: "Do's & Don'ts",
     items: [
       "✅ Carry cash — ATMs are limited in remote areas",
       "✅ Start treks early morning (5-6 AM) especially in summer",
@@ -39,7 +39,7 @@ const TIPS = [
     ]
   },
   {
-    icon: "🆘", title: "Emergency Contacts",
+    icon: "", title: "Emergency Contacts",
     items: [
       "Junnar Police Station: 02132-222233",
       "Junnar Rural Hospital: 02132-222055",
@@ -48,7 +48,7 @@ const TIPS = [
     ]
   },
   {
-    icon: "🎒", title: "What to Pack",
+    icon: "", title: "What to Pack",
     items: [
       "Trekking shoes (mandatory for Shivneri, Naneghat)",
       "Rain jacket  (July–October)",
@@ -57,7 +57,7 @@ const TIPS = [
     ]
   },
   {
-  icon: "🛍️", title: "Must Buy from Junnar",
+  icon: "", title: "Must Buy from Junnar",
   items: [
     "High-quality wheat grown locally",
     "Famous Indrayani rice (aromatic & soft)",
@@ -89,13 +89,13 @@ export default function TravelTips() {
 
       {/* Distance Cards */}
       <section style={styles.distanceSection}>
-        <h2 style={styles.sectionTitle}>📍 Distance from Major Cities</h2>
+        <h2 style={styles.sectionTitle}> Distance from Major Cities</h2>
         <div style={styles.distanceGrid}>
           {DISTANCES.map(d => (
             <div key={d.from} style={styles.distanceCard}>
               <div style={styles.distanceCity}>{d.from}</div>
               <div style={styles.distanceKm}>{d.km}</div>
-              <div style={styles.distanceTime}>🕐 {d.time}</div>
+              <div style={styles.distanceTime}> {d.time}</div>
             </div>
           ))}
         </div>
@@ -118,12 +118,12 @@ export default function TravelTips() {
 
       {/* Best Seasons */}
       <section style={styles.seasonSection}>
-        <h2 style={styles.sectionTitle}>🗓️ Best Seasons to Visit</h2>
+        <h2 style={styles.sectionTitle}>Best Seasons to Visit</h2>
         <div style={styles.seasonGrid}>
           {[
-            { season: "Winter", months: "Oct – Jan", emoji: "❄️", desc: "Best overall. All places accessible. Pleasant weather.", color: "#ff6b00" },
-            { season: "Monsoon", months: "July – Oct", emoji: "🌧️", desc: "Malshej Ghat is magical. Waterfalls at peak. Leeches on trails.", color: "#0ea5e9" },
-            { season: "Summer", months: "Feb – Apr", emoji: "☀️", desc: "Hot but less crowded. Start treks by 6 AM.", color: "#f59e0b" },
+            { season: "Winter", months: "Oct – Jan", emoji: "", desc: "Best overall. All places accessible. Pleasant weather.", color: "#ff6b00" },
+            { season: "Monsoon", months: "July – Oct", emoji: "", desc: "Malshej Ghat is magical. Waterfalls at peak. Leeches on trails.", color: "#0ea5e9" },
+            { season: "Summer", months: "Feb – Apr", emoji: "", desc: "Hot but less crowded. Start treks by 6 AM.", color: "#f59e0b" },
           ].map(s => (
             <div key={s.season} style={{ ...styles.seasonCard, borderColor: s.color }}>
               <div style={{ fontSize: "2.5rem" }}>{s.emoji}</div>

@@ -33,9 +33,9 @@ export default function Profile() {
   if (loading) return <div style={styles.loading}><div style={styles.spinner} /></div>;
 
   const STAT_ITEMS = [
-    { label: "Itineraries", value: profile.itineraryCount, icon: "🗺️" },
-    { label: "Reviews", value: profile.reviewCount, icon: "⭐" },
-    { label: "Favourites", value: favPlaces.length, icon: "❤️" },
+    { label: "Itineraries", value: profile.itineraryCount, icon: "" },
+    { label: "Reviews", value: profile.reviewCount, icon: "" },
+    { label: "Favourites", value: favPlaces.length, icon: "" },
   ];
 
   return (
