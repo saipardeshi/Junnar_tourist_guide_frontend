@@ -62,10 +62,10 @@ export default function AdminDashboard() {
       {tab === "overview" && stats && (
         <div style={styles.statsGrid}>
           {[
-            { label: "Total Users",       value: stats.totalUsers,       icon: "👥" },
-            { label: "Total Places",      value: stats.totalPlaces,      icon: "📍" },
-            { label: "Total Reviews",     value: stats.totalReviews,     icon: "⭐" },
-            { label: "Total Itineraries", value: stats.totalItineraries, icon: "🗺️" },
+            { label: "Total Users",       value: stats.totalUsers,       icon: "" },
+            { label: "Total Places",      value: stats.totalPlaces,      icon: "" },
+            { label: "Total Reviews",     value: stats.totalReviews,     icon: "" },
+            { label: "Total Itineraries", value: stats.totalItineraries, icon: "" },
           ].map(s => (
             <div key={s.label} style={styles.statCard}>
               <div style={styles.statIcon}>{s.icon}</div>

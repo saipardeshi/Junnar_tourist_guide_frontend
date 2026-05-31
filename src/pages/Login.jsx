@@ -28,7 +28,7 @@ export default function Login() {
           <h1 style={styles.leftTitle}>JUNNAR</h1>
           <p style={styles.leftSub}>Maharashtra's First Tourist Taluka</p>
           <div style={styles.leftStats}>
-            {["🏯 Shivneri Fort", "🦁 Bhimashankar", "🕌 Lenyadri Caves", "🌊 Malshej Ghat"].map(item => (
+            {[" Shivneri Fort", " Bhimashankar", " Lenyadri Caves", " Malshej Ghat"].map(item => (
               <div key={item} style={styles.leftStat}>{item}</div>
             ))}
           </div>

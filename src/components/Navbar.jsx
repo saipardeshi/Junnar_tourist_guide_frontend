@@ -87,8 +87,8 @@ export default function Navbar() {
               </button>
               {menuOpen && (
                 <div style={styles.dropdown}>
-                  <Link to="/profile"     style={styles.dropItem} onClick={closeAll}>👤 Profile</Link>
-                  <Link to="/itineraries" style={styles.dropItem} onClick={closeAll}>🗺️ My Trips</Link>
+                  <Link to="/profile"     style={styles.dropItem} onClick={closeAll}>Profile</Link>
+                  <Link to="/itineraries" style={styles.dropItem} onClick={closeAll}> My Trips</Link>
                   {user.role === "ADMIN" && (
                     <Link to="/admin" style={styles.dropItem} onClick={closeAll}>🔑 Admin Dashboard</Link>
                   )}

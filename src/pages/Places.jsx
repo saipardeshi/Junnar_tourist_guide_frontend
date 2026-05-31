@@ -21,12 +21,12 @@ const BADGE_COLORS = {
 
 // ── Category icons ────────────────────────────────────────────────────────────
 const CATEGORY_ICONS = {
-  All:     "🗺️",
-  Fort:    "🏔️",
-  Temple:  "🛕",
-  Cave:    "🪨",
-  Nature:  "🌿",
-  Dam:     "💧",
+  All:     "",
+  Fort:    "",
+  Temple:  "",
+  Cave:    "",
+  Nature:  "",
+  Dam:     "",
 };
 
 export default function Places() {

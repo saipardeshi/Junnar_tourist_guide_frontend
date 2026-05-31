@@ -213,11 +213,11 @@ export default function PlaceDetail() {
           <p style={styles.infoHint}>Click each section to expand details</p>
 
           <AccordionItem defaultOpen
-            icon="📖" title="About This Place"
+            icon="" title="About This Place"
             content={<p style={{ margin: 0 }}>{place.description}</p>}
           />
           <AccordionItem
-            icon="🗓️" title="Best Time to Visit"
+            icon="" title="Best Time to Visit"
             content={
               <div>
                 <p style={{ margin: 0 }}>{place.bestTimeToVisit || "October to February (Winter season recommended)"}</p>
@@ -233,7 +233,7 @@ export default function PlaceDetail() {
             }
           />
           <AccordionItem
-            icon="🎫" title="Entry Fee & Timings"
+            icon="" title="Entry Fee & Timings"
             content={
               <div style={styles.feeGrid}>
                 <div><strong style={{ color: "#ccc" }}>Entry Fee</strong><br />{place.entryFee || "Free"}</div>
@@ -242,7 +242,7 @@ export default function PlaceDetail() {
             }
           />
           <AccordionItem
-            icon="🚗" title="How to Reach"
+            icon="" title="How to Reach"
             content={
               <ul style={{ margin: 0, paddingLeft: "1rem", lineHeight: "2" }}>
                 <li>From <strong style={{ color: "#ccc" }}>Pune</strong>: 85 km via Chakan–Rajgurunagar road (2.5 hrs)</li>
@@ -254,7 +254,7 @@ export default function PlaceDetail() {
           />
           {place.tags?.length > 0 && (
             <AccordionItem
-              icon="🏷️" title="Tags & Activities"
+              icon="" title="Tags & Activities"
               content={
                 <div style={styles.tagWrap}>
                   {place.tags.map(tag => (
@@ -265,7 +265,7 @@ export default function PlaceDetail() {
             />
           )}
           <AccordionItem
-            icon="💡" title="Travel Tips"
+            icon="" title="Travel Tips"
             content={
               <ul style={{ margin: 0, paddingLeft: "1rem", lineHeight: "2" }}>
                 <li>Carry water & snacks — shops may not be available</li>

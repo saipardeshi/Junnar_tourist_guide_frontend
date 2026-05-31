@@ -63,7 +63,7 @@ export default function CostEstimator() {
 
           <label style={styles.label}>Transport</label>
           <div style={styles.options}>
-            {[["bus","🚌 ST Bus","₹300/day"],["car","🚗 Cab","₹800/day"],["bike","🏍️ Bike","₹200/day"]].map(([val,label,cost]) => (
+            {[["bus"," ST Bus","₹300/day"],["car"," Cab","₹800/day"],["bike"," Bike","₹200/day"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, transport: val })}
                 style={{ ...styles.option, ...(form.transport === val ? styles.optionActive : {}) }}>
                 <div>{label}</div><div style={styles.optionCost}>{cost}</div>
@@ -73,7 +73,7 @@ export default function CostEstimator() {
 
           <label style={styles.label}>Accommodation</label>
           <div style={styles.options}>
-            {[["camping","⛺ Camping","Free"],["budget","🏠 Budget Stay","₹600/night"],["hotel","🏨 Hotel","₹1500/night"]].map(([val,label,cost]) => (
+            {[["camping"," Camping","Free"],["budget"," Budget Stay","₹600/night"],["hotel"," Hotel","₹1500/night"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, stay: val })}
                 style={{ ...styles.option, ...(form.stay === val ? styles.optionActive : {}) }}>
                 <div>{label}</div><div style={styles.optionCost}>{cost}</div>
@@ -83,7 +83,7 @@ export default function CostEstimator() {
 
           <label style={styles.label}>Food Budget</label>
           <div style={styles.options}>
-            {[["budget","🍱 Budget","₹200/day"],["moderate","🍽️ Moderate","₹400/day"],["comfort","🥘 Comfort","₹700/day"]].map(([val,label,cost]) => (
+            {[["budget"," Budget","₹200/day"],["moderate","Moderate","₹400/day"],["comfort"," Comfort","₹700/day"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, food: val })}
                 style={{ ...styles.option, ...(form.food === val ? styles.optionActive : {}) }}>
                 <div>{label}</div><div style={styles.optionCost}>{cost}</div>
@@ -118,10 +118,10 @@ export default function CostEstimator() {
               </div>
               <div style={styles.breakdown}>
                 {[
-                  ["🚌", "Transport", result.transportCost],
-                  ["🏠", "Stay", result.stayCost],
-                  ["🍽️", "Food", result.foodCost],
-                  ["🎫", "Entry Fees", result.entryCost],
+                  ["", "Transport", result.transportCost],
+                  ["", "Stay", result.stayCost],
+                  ["", "Food", result.foodCost],
+                  ["", "Entry Fees", result.entryCost],
                 ].map(([icon, label, val]) => (
                   <div key={label} style={styles.breakdownRow}>
                     <span>{icon} {label}</span>
@@ -130,12 +130,12 @@ export default function CostEstimator() {
                 ))}
               </div>
               <div style={styles.tip}>
-                💡 Carry extra ₹{fmt(Math.round(result.total * 0.15))} as contingency (15%)
+                 Carry extra ₹{fmt(Math.round(result.total * 0.15))} as contingency (15%)
               </div>
             </div>
           ) : (
             <div style={styles.emptyResult}>
-              <div style={{ fontSize: "3rem" }}>🧮</div>
+              <div style={{ fontSize: "3rem" }}></div>
               <p>Fill in your trip details and click <strong style={{ color: "#ff6b00" }}>Calculate Budget</strong> to see the estimate</p>
             </div>
           )}

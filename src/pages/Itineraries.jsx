@@ -119,9 +119,9 @@ export default function Itineraries() {
               <div style={styles.cardTop}>
                 <div>
                   <h3 style={styles.cardTitle}>{it.title}</h3>
-                  <span style={styles.daysBadge}>📅 {it.numberOfDays} Day{it.numberOfDays > 1 ? "s" : ""}</span>
+                  <span style={styles.daysBadge}> {it.numberOfDays} Day{it.numberOfDays > 1 ? "s" : ""}</span>
                 </div>
-                <button onClick={() => handleDelete(it.id)} style={styles.deleteBtn}>🗑️</button>
+                <button onClick={() => handleDelete(it.id)} style={styles.deleteBtn}></button>
               </div>
               {it.description && <p style={styles.cardDesc}>{it.description}</p>}
               {it.placeIds?.length > 0 && (
