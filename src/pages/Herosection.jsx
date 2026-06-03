@@ -103,12 +103,11 @@ export default function Herosection() {
         }
         .hs-page { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
 
-        /* ── HERO ── */
         .dj-hero {
           position: relative;
           min-height: 100vh;
           display: flex; align-items: center; justify-content: center;
-          padding: 100px 64px 80px;
+          padding: 20px 64px 80px;
           overflow: visible;
         }
         .dj-glow1 { position: absolute; top: -120px; right: -120px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(232,82,10,0.13) 0%, transparent 65%); pointer-events: none; animation: dj-pulse 6s ease-in-out infinite; }
@@ -117,7 +116,6 @@ export default function Herosection() {
         .dj-diag { position: absolute; top: 0; right: 200px; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(232,82,10,0.18) 30%, rgba(232,82,10,0.18) 70%, transparent); pointer-events: none; transform: rotate(8deg) scaleY(1.3); transform-origin: top center; }
         @keyframes dj-pulse { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
 
-        /* ── INNER GRID: 50/50 ── */
         .dj-inner {
           position: relative; z-index: 2;
           max-width: 1200px; width: 100%;
@@ -127,8 +125,7 @@ export default function Herosection() {
           align-items: center;
         }
 
-        /* ── LEFT ── */
-        .dj-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(232,82,10,0.35); border-radius: 20px; background: rgba(232,82,10,0.08); color: var(--org); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px; opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s; }
+        .dj-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(232,82,10,0.35); border-radius: 20px; background: rgba(232,82,10,0.08); color: var(--org); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s; }
         .dj-badge.vis { opacity: 1; transform: translateY(0); }
         .dj-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--org); animation: dj-blink 2s ease-in-out infinite; }
         @keyframes dj-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -157,7 +154,6 @@ export default function Herosection() {
         .dj-stat-lbl { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; margin-top: 3px; }
         .dj-stat-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.08); align-self: center; }
 
-        /* ── RIGHT ── */
         .dj-right { opacity: 0; transform: translateX(24px); transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s; }
         .dj-right.vis { opacity: 1; transform: translateX(0); }
         .dj-carousel-box {
@@ -175,16 +171,13 @@ export default function Herosection() {
           padding: 0 50px;
         }
 
-        /* ── SCROLL ── */
         .dj-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.2); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0; animation: dj-scrollfade 1s ease 1.2s forwards; }
         @keyframes dj-scrollfade { to { opacity: 1; } }
         .dj-scroll-line { width: 1px; height: 32px; background: linear-gradient(to bottom, rgba(232,82,10,0.6), transparent); animation: dj-scrollline 1.6s ease-in-out infinite; }
         @keyframes dj-scrollline { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-        /* ── DIVIDER ── */
         .dj-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(232,82,10,0.25) 30%, rgba(232,82,10,0.25) 70%, transparent); margin: 0 64px; }
 
-        /* ── SECTIONS ── */
         .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .rv.on { opacity: 1; transform: translateY(0); }
         .sec { padding: 80px 64px; }
@@ -194,7 +187,6 @@ export default function Herosection() {
         .stitle em { font-style: italic; color: rgba(240,235,224,0.38); }
         .slead { font-size: 14px; color: var(--muted); line-height: 1.85; max-width: 620px; margin-top: 14px; font-weight: 300; }
 
-        /* ── NEWS ── */
         .news-wrap { padding: 60px 64px; }
         .news-head { text-align: center; margin-bottom: 36px; }
         .ncard { background: rgba(240,235,224,0.03); border: 1px solid var(--org-b); border-radius: 20px; overflow: hidden; max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; }
@@ -214,7 +206,6 @@ export default function Herosection() {
         .nmore { background: none; border: 1px solid rgba(232,82,10,0.4); color: var(--org); padding: 9px 18px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; width: fit-content; transition: all 0.2s; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
         .nmore:hover { background: rgba(232,82,10,0.1); border-color: var(--org); }
 
-        /* ── TIMELINE ── */
         .tl { position: relative; margin-top: 60px; padding-left: 30px; }
         .tl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--org) 8%, var(--org) 92%, transparent); }
         .ti { position: relative; padding: 0 0 48px 38px; } .ti:last-child { padding-bottom: 0; }
@@ -224,7 +215,6 @@ export default function Herosection() {
         .ttitle { font-family: 'Playfair Display', serif; font-size: clamp(16px, 2.8vw, 21px); color: var(--text); font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
         .tbody { font-size: 13px; color: var(--muted); line-height: 1.85; font-weight: 300; max-width: 600px; }
 
-        /* ── GMRT ── */
         .gmrt-card { margin-top: 48px; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, rgba(232,82,10,0.07), rgba(201,147,12,0.04)); border: 1px solid var(--org-b); display: grid; grid-template-columns: 1fr 1fr; }
         .gl { padding: 40px 34px; } .gr { padding: 40px 34px; background: rgba(0,0,0,0.25); border-left: 1px solid rgba(232,82,10,0.1); }
         .gtag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
@@ -235,7 +225,6 @@ export default function Herosection() {
         .gnum { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--text); line-height: 1; letter-spacing: 1px; }
         .glbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
 
-        /* ── EXPERIENCES ── */
         .etabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 38px; }
         .etab { background: rgba(240,235,224,0.04); border: 1px solid rgba(240,235,224,0.1); padding: 11px 16px; border-radius: 8px; font-size: 13px; color: var(--muted); cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 8px; -webkit-tap-highlight-color: transparent; }
         .etab:hover { background: rgba(232,82,10,0.08); border-color: rgba(232,82,10,0.3); color: var(--text); }
@@ -252,13 +241,12 @@ export default function Herosection() {
         .etime { font-size: 11px; color: rgba(240,235,224,0.3); margin-bottom: 5px; letter-spacing: 1px; }
         .etip { font-size: 12px; color: var(--muted); line-height: 1.6; font-style: italic; }
 
-        /* ── RESPONSIVE ── */
         @media (max-width: 1100px) {
           .dj-hero { padding: 100px 40px 80px; }
           .dj-carousel-box { height: 420px; padding: 0 40px; }
         }
         @media (max-width: 900px) {
-          .dj-hero { padding: 90px 32px 70px; min-height: auto; }
+          .dj-hero { padding: 50px 32px 70px; min-height: auto; }
           .dj-inner { grid-template-columns: 1fr; gap: 40px; }
           .dj-right { width: 100%; }
           .dj-carousel-box { height: 380px; padding: 0 40px; }
@@ -323,10 +311,6 @@ export default function Herosection() {
           <div className="dj-inner">
             {/* LEFT */}
             <div className="dj-left">
-              <div className={`dj-badge${heroVisible ? " vis" : ""}`}>
-                <span className="dj-badge-dot" />
-                Maharashtra's First Tourist Taluka
-              </div>
               <div className={`dj-title${heroVisible ? " vis" : ""}`}>
                 <span>DISCOVER</span>
                 <span className="dj-title-accent">JUNNAR</span>
@@ -353,6 +337,12 @@ export default function Herosection() {
 
             {/* RIGHT */}
             <div className={`dj-right${heroVisible ? " vis" : ""}`}>
+              <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "12px" , marginRight: "40px", paddingRight: "85px"}}>
+                <div className={`dj-badge${heroVisible ? " vis" : ""}`}>
+                  <span className="dj-badge-dot" />
+                  Maharashtra's First Tourist Taluka
+                </div>
+              </div>
               <div className="dj-carousel-box">
                 <HeroCarousel />
               </div>
