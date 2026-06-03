@@ -149,15 +149,15 @@ function PlaceCard({ place, images, onClick }) {
       {/* Card body */}
       <div style={styles.cardBody}>
         <h3 style={styles.cardTitle}>{place.name}</h3>
-        <p style={styles.cardLocation}>📍 {place.location}</p>
+        <p style={styles.cardLocation}> {place.location}</p>
         <p style={styles.cardDesc}>
           {place.description?.slice(0, 80)}{place.description?.length > 80 ? "..." : ""}
         </p>
 
         <div style={styles.cardFooter}>
-          <span style={styles.rating}>⭐ {place.rating || "N/A"}</span>
+          <span style={styles.bing}> {place.rating || "N/A"}</span>
           <span style={styles.feeTag}>
-            {place.entryFee === "Free" || place.entryFee === "0" ? "🆓 Free" : `🎫 ${place.entryFee}`}
+            {place.entryFee === "Free" || place.entryFee === "0" ? " Free" : ` ${place.entryFee}`}
           </span>
         </div>
 

@@ -142,7 +142,7 @@ export default function CostEstimator() {
 
           {/* Quick Tips */}
           <div style={styles.tipsCard}>
-            <h4 style={styles.tipsTitle}>💡 Money Saving Tips</h4>
+            <h4 style={styles.tipsTitle}> Money Saving Tips</h4>
             <ul style={styles.tipsList}>
               <li>Book ST Bus from Pune — cheapest option</li>
               <li>Most places in Junnar have free entry</li>
