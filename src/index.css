@@ -22,7 +22,10 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  overflow-x: hidden;
 }
+
+img, video { max-width: 100%; height: auto; }
 
 a { text-decoration: none; color: inherit; }
 
@@ -32,9 +35,9 @@ button {
   transition: all 0.25s ease;
 }
 
-input, textarea { font-family: 'Outfit', sans-serif; }
+input, textarea, select { font-family: 'Outfit', sans-serif; max-width: 100%; }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 3px var(--accent-dim);
@@ -52,4 +55,30 @@ input:focus, textarea:focus {
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+/* ── Mobile Responsive Helpers ── */
+@media (max-width: 768px) {
+  .responsive-page {
+    padding: 2rem 1.25rem !important;
+  }
+  .responsive-title {
+    font-size: clamp(2.2rem, 7vw, 3.2rem) !important;
+  }
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+  .responsive-two-col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-page {
+    padding: 1.5rem 1rem !important;
+  }
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

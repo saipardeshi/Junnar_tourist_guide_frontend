@@ -25,8 +25,18 @@ export default function Register() {
   };
 
   return (
-    <div style={styles.page}>
-      <div style={styles.left}>
+    <div className="auth-page" style={styles.page}>
+      <style>{`
+        .auth-page { display: flex; min-height: 100vh; background: #0a0a0a; }
+        .auth-left { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #0a0a0a 0%, #1a0800 100%); }
+        .auth-right { width: 480px; display: flex; align-items: center; justify-content: center; padding: 2rem; border-left: 1px solid #1a1a1a; }
+        @media (max-width: 900px) {
+          .auth-page { flex-direction: column; }
+          .auth-left { display: none !important; }
+          .auth-right { width: 100% !important; border-left: none !important; padding: 3rem 1.5rem !important; }
+        }
+      `}</style>
+      <div className="auth-left" style={styles.left}>
         <div style={styles.leftBg} />
         <div style={styles.leftContent}>
           <h1 style={styles.leftTitle}>JOIN US</h1>
@@ -49,7 +59,7 @@ export default function Register() {
         </div>
       </div>
 
-      <div style={styles.right}>
+      <div className="auth-right" style={styles.right}>
         <div style={styles.formCard}>
           <h2 style={styles.formTitle}>Create Account</h2>
           <p style={styles.formSub}>Free forever — no credit card needed</p>

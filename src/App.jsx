@@ -15,11 +15,13 @@ import AdminDashboard from "./pages/AdminDashboard";
 import MapView from "./components/MapView";
 import Background3D from "./components/Background3D";
 import Hotels from "./pages/Hotels";
+import ScrollToTop from "./components/ScrollToTop";
 //import HeroSection from "./components/HeroSection";
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
 
         {/* 👇 3D Background FIRST */}
         <Background3D />

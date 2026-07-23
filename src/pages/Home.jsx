@@ -1,4 +1,5 @@
 import Herosection from "./Herosection";
+import PopularDestinations from "../components/PopularDestinations";
 
 export default function Home() {
   return (
@@ -6,8 +7,8 @@ export default function Home() {
 
       <style>{`
   .ft { position: relative; margin-top: 0; }
-  .ft-body { background: #080808; border-top: 1px solid rgba(232,82,10,0.15); padding: 48px 64px 28px; }
-  .ft-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .ft-body { background: #080808; border-top: 1px solid rgba(232,82,10,0.15); padding: 56px 64px 32px; }
+  .ft-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
   .ft-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; letter-spacing: 3px; }
   .ft-brand-name span { color: #E8520A; }
   .ft-brand-sub { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; line-height: 1.7; max-width: 240px; }
@@ -15,7 +16,7 @@ export default function Home() {
   .ft-links { display: flex; flex-direction: column; gap: 10px; }
   .ft-link { font-size: 13px; color: rgba(255,255,255,0.4); cursor: pointer; transition: color 0.2s; text-decoration: none; }
   .ft-link:hover { color: #fff; }
-  .ft-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .ft-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .ft-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
   .ft-copy span { color: #E8520A; }
   .ft-bottom-links { display: flex; gap: 20px; }
@@ -56,6 +57,11 @@ export default function Home() {
         <Herosection />
       </div>
 
+      {/* Popular Destinations Carousel Section */}
+      <div style={{ position: "relative", zIndex: 2 }}>
+        <PopularDestinations />
+      </div>
+
       {/* ── Pre-footer image section ── */}
       <div style={{
         position: "relative",
@@ -93,9 +99,9 @@ export default function Home() {
           textAlign: "center",
         }}>
           <div style={{
-            fontSize: "0.65rem",
-            letterSpacing: "0.3em",
-            color: "#ff6b00",
+            fontSize: "11px",
+            letterSpacing: "3.5px",
+            color: "#E8520A",
             fontWeight: 700,
             textTransform: "uppercase",
             fontFamily: "'DM Sans', sans-serif",
