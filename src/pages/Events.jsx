@@ -50,6 +50,14 @@ const TAG_COLORS = {
 export default function Events() {
   return (
     <div style={styles.page}>
+      <style>{`
+        .ev-card { display: flex; gap: 1.5rem; }
+        .ev-left { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; min-width: 60px; }
+        @media (max-width: 600px) {
+          .ev-card { flex-direction: column; gap: 0.8rem !important; }
+          .ev-left { flex-direction: row !important; min-width: auto !important; justify-content: flex-start; }
+        }
+      `}</style>
       {/* Header */}
       <div style={styles.header}>
         <h1 style={styles.title}>
@@ -74,8 +82,8 @@ export default function Events() {
             <div style={styles.monthLabel}>{group.month}</div>
             <div style={styles.monthEvents}>
               {group.events.map((event) => (
-                <div key={event.name} style={styles.eventCard}>
-                  <div style={styles.eventLeft}>
+                <div key={event.name} className="ev-card" style={styles.eventCard}>
+                  <div className="ev-left" style={styles.eventLeft}>
                     <div style={styles.eventIcon}>{event.icon}</div>
                     <div style={{ ...styles.eventTag, background: TAG_COLORS[event.tag] + "22", color: TAG_COLORS[event.tag], border: `1px solid ${TAG_COLORS[event.tag]}44` }}>
                       {event.tag}
@@ -108,9 +116,9 @@ export default function Events() {
 }
 
 const styles = {
-  page: { background: "#0a0a0a", minHeight: "100vh", padding: "3rem 2rem", maxWidth: "1000px", margin: "0 auto" },
+  page: { background: "#0a0a0a", minHeight: "100vh", padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", maxWidth: "1000px", margin: "0 auto" },
   header: { textAlign: "center", marginBottom: "2rem" },
-  title: { fontFamily: "'Bebas Neue', sans-serif", fontSize: "3.5rem", letterSpacing: "0.05em" },
+  title: { fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(2.2rem, 7vw, 3.5rem)", letterSpacing: "0.05em" },
   subtitle: { color: "#555", marginTop: "0.5rem" },
   legend: { display: "flex", flexWrap: "wrap", gap: "0.6rem", justifyContent: "center", marginBottom: "3rem" },
   legendItem: { padding: "0.3rem 0.9rem", borderRadius: "20px", border: "1px solid", fontSize: "0.8rem", fontWeight: "600" },

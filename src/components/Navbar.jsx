@@ -49,82 +49,109 @@ export default function Navbar() {
   return (
     <>
       <style>{`
+        .nb-nav {
+          position: sticky;
+          top: 0;
+          z-index: 200;
+          background: rgba(10,10,10,0.97);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid #1a1a1a;
+          padding: 0.85rem 64px;
+        }
+        .nb-container {
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        }
         .nb-links  { display: flex; }
         .nb-auth   { display: flex; }
         .nb-burger { display: none; }
+        @media (max-width: 900px) {
+          .nb-nav { padding: 0.85rem 40px; }
+        }
         @media (max-width: 768px) {
           .nb-links  { display: none !important; }
           .nb-auth   { display: none !important; }
           .nb-burger { display: flex !important; }
         }
+        @media (max-width: 640px) {
+          .nb-nav { padding: 0.75rem 18px; }
+        }
       `}</style>
 
-      <nav style={styles.nav}>
-        {/* Logo */}
-        <Link to="/" style={styles.logo} onClick={closeAll}>
-          <span style={styles.logoAccent}>J</span>UNNAR
-          <span style={styles.logoSub}> Guide</span>
-        </Link>
+      <nav className="nb-nav">
+        <div className="nb-container">
+          {/* Logo */}
+          <Link to="/" style={styles.logo} onClick={closeAll}>
+            <span style={styles.logoAccent}>J</span>UNNAR
+            <span style={styles.logoSub}> Guide</span>
+          </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="nb-links" style={styles.links}>
-          {NAV_LINKS.map(l => (
-            <Link key={l.path} to={l.path} style={linkStyle(l.path)}>{l.label}</Link>
-          ))}
-          {user && (
-            <Link to="/itineraries" style={linkStyle("/itineraries")}>My Trips</Link>
-          )}
+          {/* Desktop Nav Links */}
+          <div className="nb-links" style={styles.links}>
+            {NAV_LINKS.map(l => (
+              <Link key={l.path} to={l.path} style={linkStyle(l.path)}>{l.label}</Link>
+            ))}
+            {user && (
+              <Link to="/itineraries" style={linkStyle("/itineraries")}>My Trips</Link>
+            )}
+          </div>
+
+          {/* Desktop Auth */}
+          <div className="nb-auth" style={styles.auth}>
+            {user ? (
+              <div style={styles.userMenu}>
+                <button style={styles.userBtn} onClick={() => setMenuOpen(!menuOpen)}>
+                  <span style={styles.avatar}>{user.name?.[0]?.toUpperCase()}</span>
+                  <span style={styles.userName}>{user.name}</span>
+                  <span style={{ color: "#555" }}>▾</span>
+                </button>
+                {menuOpen && (
+                  <div style={styles.dropdown}>
+                    <Link to="/profile"     style={styles.dropItem} onClick={closeAll}>Profile</Link>
+                    <Link to="/itineraries" style={styles.dropItem} onClick={closeAll}> My Trips</Link>
+                    {user.role === "ADMIN" && (
+                      <Link to="/admin" style={styles.dropItem} onClick={closeAll}>🔑 Admin Dashboard</Link>
+                    )}
+                    <div style={styles.dropDivider} />
+                    <button style={styles.dropLogout} onClick={() => { logout(); navigate("/"); closeAll(); }}>
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link to="/login"    style={styles.outlineBtn}>Login</Link>
+                <Link to="/register" style={styles.accentBtn}>Register</Link>
+              </>
+            )}
+          </div>
+
+          {/* Hamburger — mobile only */}
+          <button className="nb-burger" style={styles.hamburger}
+            onClick={() => { setMobileOpen(v => !v); setMenuOpen(false); }}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="3" y1="3" x2="17" y2="17" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="17" y1="3" x2="3"  y2="17" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="3" y1="5"  x2="17" y2="5"  stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="3" y1="10" x2="17" y2="10" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="3" y1="15" x2="17" y2="15" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            )}
+          </button>
         </div>
-
-        {/* Desktop Auth */}
-        <div className="nb-auth" style={styles.auth}>
-          {user ? (
-            <div style={styles.userMenu}>
-              <button style={styles.userBtn} onClick={() => setMenuOpen(!menuOpen)}>
-                <span style={styles.avatar}>{user.name?.[0]?.toUpperCase()}</span>
-                <span style={styles.userName}>{user.name}</span>
-                <span style={{ color: "#555" }}>▾</span>
-              </button>
-              {menuOpen && (
-                <div style={styles.dropdown}>
-                  <Link to="/profile"     style={styles.dropItem} onClick={closeAll}>Profile</Link>
-                  <Link to="/itineraries" style={styles.dropItem} onClick={closeAll}> My Trips</Link>
-                  {user.role === "ADMIN" && (
-                    <Link to="/admin" style={styles.dropItem} onClick={closeAll}>🔑 Admin Dashboard</Link>
-                  )}
-                  <div style={styles.dropDivider} />
-                  <button style={styles.dropLogout} onClick={() => { logout(); navigate("/"); closeAll(); }}>
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              <Link to="/login"    style={styles.outlineBtn}>Login</Link>
-              <Link to="/register" style={styles.accentBtn}>Register</Link>
-            </>
-          )}
-        </div>
-
-        {/* Hamburger — mobile only */}
-        <button className="nb-burger" style={styles.hamburger}
-          onClick={() => { setMobileOpen(v => !v); setMenuOpen(false); }}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? (
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <line x1="3" y1="3" x2="17" y2="17" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="17" y1="3" x2="3"  y2="17" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          ) : (
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <line x1="2" y1="5"  x2="18" y2="5"  stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="2" y1="10" x2="18" y2="10" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="2" y1="15" x2="18" y2="15" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          )}
-        </button>
       </nav>
 
       {/* ── Mobile Drawer ── */}

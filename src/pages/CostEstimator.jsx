@@ -38,17 +38,29 @@ export default function CostEstimator() {
 
   return (
     <div style={styles.page}>
+      <style>{`
+        .ce-grid { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; }
+        .ce-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+        .ce-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 900px) {
+          .ce-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .ce-options { grid-template-columns: 1fr !important; }
+          .ce-row { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       <div style={styles.header}>
         <h1 style={styles.title}>TRIP COST <span style={{ color: "#ff6b00" }}>ESTIMATOR</span></h1>
         <p style={styles.subtitle}>Plan your Junnar budget before you travel</p>
       </div>
 
-      <div style={styles.grid}>
+      <div className="ce-grid" style={styles.grid}>
         {/* Form */}
         <div style={styles.formCard}>
           <h3 style={styles.sectionLabel}>Trip Details</h3>
 
-          <div style={styles.row}>
+          <div className="ce-row" style={styles.row}>
             <div style={styles.field}>
               <label style={styles.label}>People</label>
               <input type="number" min="1" max="20" style={styles.input}
@@ -62,7 +74,7 @@ export default function CostEstimator() {
           </div>
 
           <label style={styles.label}>Transport</label>
-          <div style={styles.options}>
+          <div className="ce-options" style={styles.options}>
             {[["bus"," ST Bus","₹300/day"],["car"," Cab","₹800/day"],["bike"," Bike","₹200/day"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, transport: val })}
                 style={{ ...styles.option, ...(form.transport === val ? styles.optionActive : {}) }}>
@@ -72,7 +84,7 @@ export default function CostEstimator() {
           </div>
 
           <label style={styles.label}>Accommodation</label>
-          <div style={styles.options}>
+          <div className="ce-options" style={styles.options}>
             {[["camping"," Camping","Free"],["budget"," Budget Stay","₹600/night"],["hotel"," Hotel","₹1500/night"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, stay: val })}
                 style={{ ...styles.option, ...(form.stay === val ? styles.optionActive : {}) }}>
@@ -82,7 +94,7 @@ export default function CostEstimator() {
           </div>
 
           <label style={styles.label}>Food Budget</label>
-          <div style={styles.options}>
+          <div className="ce-options" style={styles.options}>
             {[["budget"," Budget","₹200/day"],["moderate","Moderate","₹400/day"],["comfort"," Comfort","₹700/day"]].map(([val,label,cost]) => (
               <div key={val} onClick={() => setForm({ ...form, food: val })}
                 style={{ ...styles.option, ...(form.food === val ? styles.optionActive : {}) }}>
@@ -157,9 +169,9 @@ export default function CostEstimator() {
 }
 
 const styles = {
-  page: { background: "#0a0a0a", minHeight: "100vh", padding: "3rem 2rem", maxWidth: "1100px", margin: "0 auto" },
+  page: { background: "#0a0a0a", minHeight: "100vh", padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", maxWidth: "1100px", margin: "0 auto" },
   header: { textAlign: "center", marginBottom: "3rem" },
-  title: { fontFamily: "'Bebas Neue',sans-serif", fontSize: "3rem", letterSpacing: "0.05em" },
+  title: { fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(2.2rem, 7vw, 3rem)", letterSpacing: "0.05em" },
   subtitle: { color: "#555", marginTop: "0.5rem" },
   grid: { display: "grid", gridTemplateColumns: "1fr 380px", gap: "1.5rem" },
   formCard: { background: "#111", border: "1px solid #1e1e1e", borderRadius: "16px", padding: "2rem" },

@@ -104,12 +104,20 @@ export default function Herosection() {
         .hs-page { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
 
         .dj-hero {
-          position: relative;
-          min-height: 100vh;
-          display: flex; align-items: center; justify-content: center;
-          padding: 20px 64px 80px;
-          overflow: visible;
-        }
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 64px 80px;
+  overflow: visible;
+}
+// .dj-hero::before {
+//   content: '';
+//   position: absolute;
+//   inset: 0;
+//   background: rgba(0,0,0,0.45);
+//   z-index: 1;
+//   pointer-events: none;
+// }
         .dj-glow1 { position: absolute; top: -120px; right: -120px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(232,82,10,0.13) 0%, transparent 65%); pointer-events: none; animation: dj-pulse 6s ease-in-out infinite; }
         .dj-glow2 { position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,147,12,0.07) 0%, transparent 65%); pointer-events: none; animation: dj-pulse 8s ease-in-out infinite reverse; }
         .dj-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(232,82,10,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(232,82,10,0.04) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }

@@ -40,8 +40,16 @@ export default function Profile() {
 
   return (
     <div style={styles.page}>
+      <style>{`
+        .prf-card { display: flex; align-items: center; gap: 2rem; }
+        .prf-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        @media (max-width: 640px) {
+          .prf-card { flex-direction: column !important; text-align: center !important; gap: 1rem !important; }
+          .prf-stats { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       {/* Profile Card */}
-      <div style={styles.profileCard}>
+      <div style={styles.profileCard} className="prf-card">
         <div style={styles.avatar}>{profile.name?.[0]?.toUpperCase()}</div>
         <div style={styles.profileInfo}>
           {editing ? (

@@ -308,7 +308,7 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 const s = {
-  page:       { background: "#0A0A0A", minHeight: "100vh", padding: "3rem 2rem", maxWidth: "1200px", margin: "0 auto", fontFamily: "'DM Sans', sans-serif" },
+  page:       { background: "#0A0A0A", minHeight: "100vh", padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", maxWidth: "1200px", margin: "0 auto", fontFamily: "'DM Sans', sans-serif" },
   header:     { textAlign: "center", marginBottom: "2.5rem" },
   headerTag:  { fontSize: "10px", letterSpacing: "4px", color: "#E8520A", textTransform: "uppercase", marginBottom: "10px" },
   title:      { fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(2.5rem, 6vw, 4rem)", letterSpacing: "0.05em", color: "#fff", margin: 0 },
@@ -318,10 +318,10 @@ const s = {
   filterBtn:  { display: "flex", alignItems: "center", gap: "6px", padding: "0.45rem 1.1rem", borderRadius: "20px", border: "1px solid #2a2a2a", background: "#111", color: "#888", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s" },
   filterBtnActive: { border: "1px solid #E8520A", background: "rgba(232,82,10,0.12)", color: "#E8520A" },
 
-  skeletonGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(340px,1fr))", gap: "1.2rem" },
+  skeletonGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(270px,1fr))", gap: "1.2rem" },
   skeleton:   { height: "460px", background: "#111", borderRadius: "16px", border: "1px solid #1e1e1e" },
   empty:      { textAlign: "center", color: "#555", padding: "5rem 0", fontSize: "1.1rem" },
-  grid:       { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(340px,1fr))", gap: "1.2rem" },
+  grid:       { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(270px,1fr))", gap: "1.2rem" },
 
   card:       { background: "#111", border: "1px solid #1e1e1e", borderRadius: "16px", overflow: "hidden", transition: "all 0.3s" },
   cardHover:  { border: "1px solid rgba(232,82,10,0.35)", transform: "translateY(-4px)", boxShadow: "0 16px 40px rgba(0,0,0,0.5)" },

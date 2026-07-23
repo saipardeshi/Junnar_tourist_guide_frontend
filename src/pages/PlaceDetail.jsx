@@ -128,7 +128,24 @@ export default function PlaceDetail() {
   const hasImages = images.length > 0;
 
   return (
-    <div style={styles.page}>
+    <div className="pd-page" style={styles.page}>
+      <style>{`
+        .pd-page { padding: 2rem; }
+        .pd-hero-main { height: 460px; }
+        .pd-hero-overlay { padding: 2rem; }
+        .pd-two-col { display: grid; grid-template-columns: 1fr 360px; gap: 1.5rem; }
+        .pd-fee-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 900px) {
+          .pd-page { padding: 1.25rem 1rem !important; }
+          .pd-hero-main { height: 320px !important; }
+          .pd-hero-overlay { padding: 1.25rem !important; }
+          .pd-two-col { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 640px) {
+          .pd-hero-main { height: 260px !important; }
+          .pd-fee-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       {lightbox !== null && (
         <Lightbox images={images} startIndex={lightbox} onClose={() => setLightbox(null)} />
       )}
@@ -140,9 +157,9 @@ export default function PlaceDetail() {
         {hasImages ? (
           <>
             {/* Main big image */}
-            <div style={styles.heroMain} onClick={() => setLightbox(heroIdx)}>
+            <div className="pd-hero-main" style={styles.heroMain} onClick={() => setLightbox(heroIdx)}>
               <img src={images[heroIdx]} alt={place.name} style={styles.heroImg} />
-              <div style={styles.heroOverlay}>
+              <div className="pd-hero-overlay" style={styles.heroOverlay}>
                 <div style={styles.heroMeta}>
                   <span style={styles.heroBadge}>{place.category}</span>
                   <h1 style={styles.heroTitle}>{place.name}</h1>
@@ -190,7 +207,7 @@ export default function PlaceDetail() {
       </div>
 
       {/* ── Two-column layout ── */}
-      <div style={styles.twoCol}>
+      <div className="pd-two-col" style={styles.twoCol}>
 
         {/* LEFT — Info accordion */}
         <div>
