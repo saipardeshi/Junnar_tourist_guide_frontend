@@ -87,9 +87,11 @@ export default function Navbar() {
       <nav className="nb-nav">
         <div className="nb-container">
           {/* Logo */}
-          <Link to="/" style={styles.logo} onClick={closeAll}>
-            <span style={styles.logoAccent}>J</span>UNNAR
-            <span style={styles.logoSub}> Guide</span>
+          <Link to="/" style={styles.logoWrapper} onClick={closeAll}>
+            <span style={styles.logoText}>
+              <span style={styles.logoAccent}>J</span>UNNAR
+              <span style={styles.logoSub}> Guide</span>
+            </span>
           </Link>
 
           {/* Desktop Nav Links */}
@@ -208,10 +210,18 @@ const styles = {
     position: "sticky", top: 0, zIndex: 200,
     gap: "1rem",
   },
-  logo: {
+  logoWrapper: {
+    display: "flex", alignItems: "center", gap: "0.6rem",
+    textDecoration: "none", flexShrink: 0,
+  },
+  logoImg: {
+    width: "36px", height: "36px",
+    objectFit: "contain", borderRadius: "6px",
+  },
+  logoText: {
     fontFamily: "'Bebas Neue',sans-serif",
     fontSize: "1.5rem", letterSpacing: "0.1em",
-    color: "#fff", textDecoration: "none", flexShrink: 0,
+    color: "#fff",
   },
   logoAccent: { color: "#ff6b00" },
   logoSub:    { fontSize: "0.68rem", color: "#888", fontFamily: "'DM Sans',sans-serif" },
