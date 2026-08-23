@@ -1,5 +1,7 @@
 import Herosection from "./Herosection";
 import PopularDestinations from "../components/PopularDestinations";
+import { Link } from "react-router-dom";
+
 
 export default function Home() {
   return (
@@ -142,35 +144,38 @@ export default function Home() {
               <div>
                 <div className="ft-col-title">Explore</div>
                 <div className="ft-links">
-                  <a className="ft-link" href="/places">Places</a>
-                  <a className="ft-link" href="/map">Map</a>
-                  <a className="ft-link" href="/events">Events</a>
-                  <a className="ft-link" href="/tips">Travel Tips</a>
+                  <Link className="ft-link" to="/places">Places</Link>
+                  <Link className="ft-link" to="/map">Map</Link>
+                  <Link className="ft-link" to="/events">Events</Link>
+                  <Link className="ft-link" to="/tips">Travel Tips</Link>
+                  <Link className="ft-link" to="/hotels">Hotels</Link>
                 </div>
               </div>
               <div>
                 <div className="ft-col-title">Plan</div>
                 <div className="ft-links">
-                  <a className="ft-link" href="/budget">Budget Planner</a>
-                  <a className="ft-link" href="/tips">Best Time to Visit</a>
-                  <a className="ft-link" href="/map">How to Reach</a>
+                  <Link className="ft-link" to="/cost">Budget Planner</Link>
+                  <Link className="ft-link" to="/ai-planner">AI Planner</Link>
+                  <Link className="ft-link" to="/tips">Best Time to Visit</Link>
+                  <Link className="ft-link" to="/map">How to Reach</Link>
                 </div>
               </div>
               <div>
                 <div className="ft-col-title">Account</div>
                 <div className="ft-links">
-                  <a className="ft-link" href="/login">Login</a>
-                  <a className="ft-link" href="/register">Register</a>
-                  <a className="ft-link" href="/profile">My Trips</a>
+                  <Link className="ft-link" to="/login">Login</Link>
+                  <Link className="ft-link" to="/register">Register</Link>
+                  <Link className="ft-link" to="/itineraries">My Trips</Link>
+                  <Link className="ft-link" to="/contact">Contact</Link>
                 </div>
               </div>
             </div>
             <div className="ft-bottom">
               <div className="ft-copy">© 2026 <span>Junnar Tourist Guide</span> · Maharashtra, India</div>
               <div className="ft-bottom-links">
-                <span className="ft-bottom-link">Privacy Policy</span>
-                <span className="ft-bottom-link">Terms</span>
-                <span className="ft-bottom-link">Contact</span>
+                <Link className="ft-bottom-link" to="/privacy">Privacy Policy</Link>
+                <Link className="ft-bottom-link" to="/terms">Terms</Link>
+                <Link className="ft-bottom-link" to="/contact">Contact</Link>
               </div>
             </div>
           </div>

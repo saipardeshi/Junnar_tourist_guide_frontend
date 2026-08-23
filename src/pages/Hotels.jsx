@@ -34,14 +34,21 @@ export default function Hotels() {
   const [mealTab, setMealTab]         = useState({});   // {hotelId: "breakfast"|"lunch"|"dinner"}
 
   useEffect(() => {
-    setLoading(true);
-    const url = activeType === "All"
-      ? `${API}/hotels`
-      : `${API}/hotels/type/${activeType}`;
-    axios.get(url)
-      .then(res => setHotels(res.data))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
+    const fetchData = async () => {
+      setLoading(true);
+      const url = activeType === "All"
+        ? `${API}/hotels`
+        : `${API}/hotels/type/${activeType}`;
+      try {
+        const res = await axios.get(url);
+        setHotels(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [activeType]);
 
   const toggleExpand = (id) => setExpanded(prev => prev === id ? null : id);
