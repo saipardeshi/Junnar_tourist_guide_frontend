@@ -37,6 +37,7 @@ export default function Places() {
   const navigate = useNavigate();
 
   const fetchPlaces = async () => {
+    await Promise.resolve();
     setLoading(true);
     try {
       let res;

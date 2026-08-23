@@ -37,6 +37,11 @@ export const updateProfile     = (data)     => API.put("/user/profile", data);
 export const toggleFavourite   = (placeId)  => API.post(`/user/favourites/${placeId}`);
 export const getFavourites     = ()         => API.get("/user/favourites");
 
+// EVENTS
+export const getEvents         = ()      => API.get("/events");
+export const adminAddEvent     = (data)  => API.post("/admin/events", data);
+export const adminDeleteEvent  = (id)    => API.delete(`/admin/events/${id}`);
+
 // ADMIN
 export const getAdminStats     = ()      => API.get("/admin/stats");
 export const getAdminUsers     = ()      => API.get("/admin/users");

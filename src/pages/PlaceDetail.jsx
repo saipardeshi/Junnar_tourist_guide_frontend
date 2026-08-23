@@ -93,6 +93,21 @@ export default function PlaceDetail() {
   const [heroIdx, setHeroIdx]     = useState(0);
   const [isFav, setIsFav]         = useState(false);
   const [favLoading, setFavLoading] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  const handleShare = async () => {
+    const url   = window.location.href;
+    const title = place?.name ? `${place.name} — Junnar Tourist Guide` : "Junnar Tourist Guide";
+    const text  = place?.description?.slice(0, 120) || "Discover amazing places in Junnar, Maharashtra.";
+    if (navigator.share) {
+      try { await navigator.share({ title, text, url }); } catch (e) { console.error(e); }
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        setShareCopied(true);
+        setTimeout(() => setShareCopied(false), 2500);
+      });
+    }
+  };
 
   useEffect(() => {
     getPlaceById(id)
@@ -167,13 +182,22 @@ export default function PlaceDetail() {
                 </div>
                 <div style={styles.heroActions}>
                   <span style={styles.expandHint}>🔍 Click to expand</span>
-                  <button
-                    style={{ ...styles.favBtn, color: isFav ? "#ff6b00" : "#aaa" }}
-                    onClick={e => { e.stopPropagation(); handleFav(); }}
-                    disabled={favLoading}
-                  >
-                    {isFav ? "❤️" : "🤍"} {isFav ? "Saved" : "Save"}
-                  </button>
+                  <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                    <button
+                      style={{ ...styles.favBtn, color: "#888", position: "relative" }}
+                      onClick={e => { e.stopPropagation(); handleShare(); }}
+                      title="Share this place"
+                    >
+                      {shareCopied ? "✅ Copied!" : "🔗 Share"}
+                    </button>
+                    <button
+                      style={{ ...styles.favBtn, color: isFav ? "#ff6b00" : "#aaa" }}
+                      onClick={e => { e.stopPropagation(); handleFav(); }}
+                      disabled={favLoading}
+                    >
+                      {isFav ? "❤️" : "🤍"} {isFav ? "Saved" : "Save"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

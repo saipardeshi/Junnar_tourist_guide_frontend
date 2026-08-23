@@ -16,6 +16,10 @@ import MapView from "./components/MapView";
 import Background3D from "./components/Background3D";
 import Hotels from "./pages/Hotels";
 import ScrollToTop from "./components/ScrollToTop";
+import AiPlanner from "./pages/AiPlanner";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Terms from "./pages/Terms";
 //import HeroSection from "./components/HeroSection";
 export default function App() {
   return (
@@ -43,6 +47,10 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/hotels" element={<Hotels />} />
+          <Route path="/ai-planner" element={<AiPlanner />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
 
       </BrowserRouter>
