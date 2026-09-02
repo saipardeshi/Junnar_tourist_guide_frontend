@@ -20,6 +20,7 @@ import AiPlanner from "./pages/AiPlanner";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+import Experiences from "./pages/Experiences";
 //import HeroSection from "./components/HeroSection";
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/experiences" element={<Experiences />} />
         </Routes>
 
       </BrowserRouter>
