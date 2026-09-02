@@ -3,14 +3,15 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const NAV_LINKS = [
-  { path: "/",            label: "Home" },
-  { path: "/places",      label: "Explore" },
-  { path: "/map",         label: "Map" },
-  { path: "/hotels",      label: "Hotels" },
-  { path: "/ai-planner",  label: "AI Planner" },
-  { path: "/cost",        label: "Budget" },
-  { path: "/tips",        label: "Travel Tips" },
-  { path: "/events",      label: "Events" },
+  { path: "/",             label: "Home" },
+  { path: "/places",       label: "Explore" },
+  { path: "/map",          label: "Map" },
+  { path: "/experiences",  label: "Experiences" },
+  { path: "/hotels",       label: "Hotels" },
+  { path: "/ai-planner",   label: "AI Planner" },
+  { path: "/cost",         label: "Budget" },
+  { path: "/tips",         label: "Travel Tips" },
+  { path: "/events",       label: "Events" },
 ];
 
 
