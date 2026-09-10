@@ -249,7 +249,7 @@ function EnquiryModal({ exp, onClose }) {
       window.removeEventListener("keydown", handler);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <div
@@ -382,6 +382,13 @@ function EnquiryModal({ exp, onClose }) {
     </div>
   );
 }
+
+// ── Shared style constant (must be declared before ExperienceCard uses it) ────
+const metaPill = {
+  fontSize: "0.7rem", padding: "0.2rem 0.65rem",
+  borderRadius: "999px", border: "1px solid #2a2a2a",
+  background: "#161616", color: "#666",
+};
 
 // ── Experience Card ───────────────────────────────────────────────────────────
 function ExperienceCard({ exp, index, onEnquire }) {
@@ -520,11 +527,7 @@ function ExperienceCard({ exp, index, onEnquire }) {
   );
 }
 
-const metaPill = {
-  fontSize: "0.7rem", padding: "0.2rem 0.65rem",
-  borderRadius: "999px", border: "1px solid #2a2a2a",
-  background: "#161616", color: "#666",
-};
+
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Experiences() {

@@ -26,7 +26,9 @@ export default function CostEstimator() {
   }));
 
   const calculate = () => {
-    const transportCost = COSTS.transport[form.transport] * form.days;
+    // Bus is a shared fare (fixed per trip); car/bike scales per vehicle needed (1 vehicle per 2-4 people)
+    const vehiclesNeeded = form.transport === "bus" ? 1 : Math.ceil(form.people / 4);
+    const transportCost = COSTS.transport[form.transport] * form.days * vehiclesNeeded;
     const stayCost      = COSTS.stay[form.stay] * form.days * Math.ceil(form.people / 2);
     const foodCost      = COSTS.food[form.food] * form.days * form.people;
     const entryCost     = form.places.reduce((sum, p) => sum + (COSTS.entryFees[p] || 0), 0) * form.people;
@@ -147,7 +149,7 @@ export default function CostEstimator() {
             </div>
           ) : (
             <div style={styles.emptyResult}>
-              <div style={{ fontSize: "3rem" }}></div>
+              <div style={{ fontSize: "3rem" }}>💰</div>
               <p>Fill in your trip details and click <strong style={{ color: "#ff6b00" }}>Calculate Budget</strong> to see the estimate</p>
             </div>
           )}

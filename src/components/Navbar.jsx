@@ -228,7 +228,8 @@ const styles = {
   },
   logoAccent: { color: "#ff6b00" },
   logoSub:    { fontSize: "0.68rem", color: "#888", fontFamily: "'DM Sans',sans-serif" },
-links: { gap: "1.4rem", alignItems: "center", flex: 1, overflow: "hidden", justifyContent: "center" },  auth:       { gap: "0.7rem", alignItems: "center", flexShrink: 0 },
+  links: { gap: "1.4rem", alignItems: "center", flex: 1, overflow: "hidden", justifyContent: "center" },
+  auth:  { gap: "0.7rem", alignItems: "center", flexShrink: 0 },
   outlineBtn: {
     padding: "0.4rem 1rem", borderRadius: "6px",
     border: "1px solid #2a2a2a", background: "transparent",
