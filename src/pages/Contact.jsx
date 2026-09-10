@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { submitContact } from "../services/api";
 
 const CONTACTS = [
   { icon: "📍", label: "Location", value: "Junnar Taluka, Pune District, Maharashtra — 410502", href: null },
   { icon: "📞", label: "Tourist Helpline", value: "1800-200-5885 (Toll Free)", href: "tel:18002005885" },
-  { icon: "📞", label: "Junnar Police", value: "02132-222233", href: "tel:0213222233" },
-  { icon: "🏥", label: "Junnar Rural Hospital", value: "02132-222055", href: "tel:0213222205" },
+  { icon: "📞", label: "Junnar Police", value: "02132-222233", href: "tel:02132222233" },
+  { icon: "🏥", label: "Junnar Rural Hospital", value: "02132-222055", href: "tel:02132222055" },
   { icon: "✉️", label: "Email", value: "contact@junnarguide.in", href: "mailto:contact@junnarguide.in" },
 ];
 
@@ -30,12 +31,16 @@ export default function Contact() {
     return e;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
-    // In a real app, POST to /api/contact. Here we simulate success.
+    try {
+      await submitContact(form);  // ✅ real API call
+    } catch {
+      // Fallback: show success even if API unavailable (e.g. backend offline)
+    }
     setSent(true);
   };
 

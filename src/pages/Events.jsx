@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../services/api";
 
+// ✅ Declared BEFORE component to avoid ReferenceError when .catch() fires
+const FALLBACK_EVENTS = [
+  { name: "Chhatrapati Shivaji Maharaj Jayanti", month: "February",         date: "19 Feb",   description: "Celebrates the birth of Chhatrapati Shivaji Maharaj — honors his bravery, leadership, and vision of Swarajya.",                                     tag: "Festival",            icon: "🚩" },
+  { name: "National Science Day (GMRT Khodad)",  month: "February",         date: "28 Feb",   description: "Celebrates the discovery of the Raman Effect by C. V. Raman and promotes science and innovation, observed at GMRT Khodad.",                      tag: "Science",             icon: "🔭" },
+  { name: "Ganesh Chaturthi at Ozar",            month: "August–September", date: "Aug/Sep",  description: "Magnificent Ganesh festival at Vighnahar Ganpati Temple. Thousands of pilgrims, processions and celebrations.",                                   tag: "Festival",            icon: "🐘" },
+  { name: "Ganesh Chaturthi at Lenyadri",        month: "August–September", date: "Aug/Sep",  description: "Ancient Ashtavinayaka shrine celebration with a unique Buddhist caves backdrop.",                                                                 tag: "Festival",            icon: "🕌" },
+  { name: "Malshej Ghat Waterfalls",             month: "August–October",   date: "Aug–Oct",  description: "Waterfalls look breathtakingly beautiful at Malshej Ghat, creating a magical natural view.",                                                      tag: "Nature",              icon: "🌊" },
+  { name: "Naneghat Monsoon Trek",               month: "August–October",   date: "Aug–Oct",  description: "Peak monsoon waterfall season with fog and reverse waterfall. Dramatic cliffs and ancient caves.",                                                tag: "Monsoon destination", icon: "🌧️" },
+  { name: "Daryaghat Trek",                      month: "August–October",   date: "Aug–Oct",  description: "Famous for reverse waterfall in monsoon with strong winds and breathtaking valley views.",                                                       tag: "Monsoon destination", icon: "🏔️" },
+  { name: "Shivneri Fort Trek Season",           month: "December–January", date: "Dec–Jan",  description: "Peak trekking season. Clear skies, cool weather, and panoramic views of Sahyadri.",                                                              tag: "Trekking",            icon: "🧗" },
+  { name: "Jivdhan Fort Trek",                   month: "December–January", date: "Dec–Jan",  description: "Clear skies, cool weather, and thrilling rock patches with stunning Sahyadri views.",                                                             tag: "Trekking",            icon: "⛰️" },
+  { name: "Junnar Heritage Walk",                month: "December–January", date: "Dec",      description: "Guided walks through Junnar's ancient sites including Buddhist caves, old temples and traditional markets.",                                       tag: "Cultural",            icon: "🏛️" },
+];
+
 const TAG_COLORS = {
   Cultural:              "#8b5cf6",
   Adventure:             "#ff6b00",
@@ -124,26 +138,12 @@ export default function Events() {
         <span style={styles.noteIcon}>ℹ</span>
         <p style={styles.noteText}>
           Exact dates for festivals like Ganesh Chaturthi vary by Hindu calendar each year.
-          Check with local tourism board or call <strong style={{ color: "#ff6b00" }}>1800-200-5885</strong> for confirmed schedules.
+          Check with local tourism board or call <a href="tel:18002005885" style={{ color: "#ff6b00", textDecoration: "none" }}>1800-200-5885</a> for confirmed schedules.
         </p>
       </div>
     </div>
   );
 }
-
-// ── Fallback data used when backend is not running ────────────────────────────
-const FALLBACK_EVENTS = [
-  { name: "Chhatrapati Shivaji Maharaj Jayanti", month: "February",         date: "19 Feb",   description: "Celebrates the birth of Chhatrapati Shivaji Maharaj — honors his bravery, leadership, and vision of Swarajya.",                                     tag: "Festival",            icon: "🚩" },
-  { name: "National Science Day (GMRT Khodad)",  month: "February",         date: "28 Feb",   description: "Celebrates the discovery of the Raman Effect by C. V. Raman and promotes science and innovation, observed at GMRT Khodad.",                      tag: "Science",             icon: "🔭" },
-  { name: "Ganesh Chaturthi at Ozar",            month: "August–September", date: "Aug/Sep",  description: "Magnificent Ganesh festival at Vighnahar Ganpati Temple. Thousands of pilgrims, processions and celebrations.",                                   tag: "Festival",            icon: "🐘" },
-  { name: "Ganesh Chaturthi at Lenyadri",        month: "August–September", date: "Aug/Sep",  description: "Ancient Ashtavinayaka shrine celebration with a unique Buddhist caves backdrop.",                                                                 tag: "Festival",            icon: "🕌" },
-  { name: "Malshej Ghat Waterfalls",             month: "August–October",   date: "Aug–Oct",  description: "Waterfalls look breathtakingly beautiful at Malshej Ghat, creating a magical natural view.",                                                      tag: "Nature",              icon: "🌊" },
-  { name: "Naneghat Monsoon Trek",               month: "August–October",   date: "Aug–Oct",  description: "Peak monsoon waterfall season with fog and reverse waterfall. Dramatic cliffs and ancient caves.",                                                tag: "Monsoon destination", icon: "🌧️" },
-  { name: "Daryaghat Trek",                      month: "August–October",   date: "Aug–Oct",  description: "Famous for reverse waterfall in monsoon with strong winds and breathtaking valley views.",                                                       tag: "Monsoon destination", icon: "🏔️" },
-  { name: "Shivneri Fort Trek Season",           month: "December–January", date: "Dec–Jan",  description: "Peak trekking season. Clear skies, cool weather, and panoramic views of Sahyadri.",                                                              tag: "Trekking",            icon: "🧗" },
-  { name: "Jivdhan Fort Trek",                   month: "December–January", date: "Dec–Jan",  description: "Clear skies, cool weather, and thrilling rock patches with stunning Sahyadri views.",                                                             tag: "Trekking",            icon: "⛰️" },
-  { name: "Junnar Heritage Walk",                month: "December–January", date: "Dec",      description: "Guided walks through Junnar's ancient sites including Buddhist caves, old temples and traditional markets.",                                       tag: "Cultural",            icon: "🏛️" },
-];
 
 const styles = {
   page:       { background: "#0a0a0a", minHeight: "100vh", padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem)", maxWidth: "1000px", margin: "0 auto" },

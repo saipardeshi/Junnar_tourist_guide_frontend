@@ -11,6 +11,8 @@ export default function Profile() {
   const [editing, setEditing] = useState(false);
   const [newName, setNewName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
 
   useEffect(() => {
     if (!user) { navigate("/login"); return; }
@@ -21,21 +23,33 @@ export default function Profile() {
         const favIds = pRes.data.favourites || [];
         setFavPlaces(plRes.data.filter(p => favIds.includes(p.id)));
       })
+      .catch(err => {
+        console.error("Failed to load profile or places:", err);
+      })
       .finally(() => setLoading(false));
   }, [user]);
 
   const handleSave = async () => {
-    const res = await updateProfile({ name: newName });
-    setProfile(prev => ({ ...prev, name: res.data.name }));
-    setEditing(false);
+    setSaving(true);
+    setSaveError("");
+    try {
+      const res = await updateProfile({ name: newName });
+      setProfile(prev => ({ ...prev, name: res.data.name }));
+      setEditing(false);
+    } catch {
+      setSaveError("Failed to update name. Try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) return <div style={styles.loading}><div style={styles.spinner} /></div>;
+  if (!profile) return null; // ✅ null guard — prevents crash if API failed
 
   const STAT_ITEMS = [
-    { label: "Itineraries", value: profile.itineraryCount, icon: "" },
-    { label: "Reviews", value: profile.reviewCount, icon: "" },
-    { label: "Favourites", value: favPlaces.length, icon: "" },
+    { label: "Itineraries", value: profile.itineraryCount, icon: "🗺️" },
+    { label: "Reviews", value: profile.reviewCount, icon: "⭐" },
+    { label: "Favourites", value: favPlaces.length, icon: "❤️" },
   ];
 
   return (
@@ -53,10 +67,13 @@ export default function Profile() {
         <div style={styles.avatar}>{profile.name?.[0]?.toUpperCase()}</div>
         <div style={styles.profileInfo}>
           {editing ? (
-            <div style={styles.editRow}>
-              <input style={styles.editInput} value={newName} onChange={e => setNewName(e.target.value)} />
-              <button style={styles.saveBtn} onClick={handleSave}>Save</button>
-              <button style={styles.cancelBtn} onClick={() => setEditing(false)}>Cancel</button>
+            <div>
+              <div style={styles.editRow}>
+                <input style={styles.editInput} value={newName} onChange={e => setNewName(e.target.value)} />
+                <button style={styles.saveBtn} onClick={handleSave} disabled={saving}>{saving ? "Saving..." : "Save"}</button>
+                <button style={styles.cancelBtn} onClick={() => { setEditing(false); setSaveError(""); }}>Cancel</button>
+              </div>
+              {saveError && <p style={{ color: "#f87171", fontSize: "0.78rem", marginTop: "0.3rem" }}>{saveError}</p>}
             </div>
           ) : (
             <div style={styles.nameRow}>

@@ -36,13 +36,13 @@ export default function Places() {
   const [activeCategory, setActiveCategory] = useState("All");
   const navigate = useNavigate();
 
-  const fetchPlaces = async () => {
-    await Promise.resolve();
+  // Accepts explicit params to avoid stale closure over search/activeCategory state
+  const fetchPlaces = async (cat = activeCategory, q = search) => {
     setLoading(true);
     try {
       let res;
-      if (search.trim()) res = await searchPlaces(search);
-      else if (activeCategory !== "All") res = await getPlacesByCategory(activeCategory);
+      if (q.trim()) res = await searchPlaces(q);
+      else if (cat !== "All") res = await getPlacesByCategory(cat);
       else res = await getAllPlaces();
       setPlaces(res.data);
     } catch (err) { console.error(err); }
@@ -53,16 +53,17 @@ export default function Places() {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => { fetchPlaces(); }, [activeCategory]);
+  // Always pass empty search when switching category to avoid stale closure
+  useEffect(() => { fetchPlaces(activeCategory, ""); }, [activeCategory]);
 
-  const handleSearch = (e) => { e.preventDefault(); fetchPlaces(); };
+  const handleSearch = (e) => { e.preventDefault(); fetchPlaces(activeCategory, search); };
 
   return (
     <div style={styles.page}>
       {/* Header */}
       <div style={styles.header}>
         <h1 style={styles.title}>EXPLORE <span style={{ color: "#ff6b00" }}>JUNNAR</span></h1>
-        <p style={styles.subtitle}>{places.length > 0 ? `${places.length - 1}+` : 0} incredible destinations</p>
+        <p style={styles.subtitle}>{places.length} incredible destinations</p>
       </div>
 
       {/* Search */}

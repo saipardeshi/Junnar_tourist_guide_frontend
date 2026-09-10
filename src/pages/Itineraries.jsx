@@ -9,6 +9,7 @@ export default function Itineraries() {
   const [itineraries, setItineraries] = useState([]);
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: "", description: "", numberOfDays: 1, placeIds: [] });
 
@@ -16,6 +17,7 @@ export default function Itineraries() {
     if (!user) { navigate("/login"); return; }
     Promise.all([getMyItineraries(), getAllPlaces()])
       .then(([iRes, pRes]) => { setItineraries(iRes.data); setPlaces(pRes.data); })
+      .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
   }, [user]);
 
@@ -31,8 +33,12 @@ export default function Itineraries() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this itinerary?")) return;
-    await deleteItinerary(id);
-    setItineraries(itineraries.filter(it => it.id !== id));
+    try {
+      await deleteItinerary(id);
+      setItineraries(itineraries.filter(it => it.id !== id));
+    } catch {
+      alert("Failed to delete itinerary. Please try again.");
+    }
   };
 
   const togglePlace = (placeId) => {
@@ -47,6 +53,12 @@ export default function Itineraries() {
   const getPlaceName = (placeId) => places.find(p => p.id === placeId)?.name || placeId;
 
   if (loading) return <div style={styles.loading}><div style={styles.spinner} /></div>;
+  if (loadError) return (
+    <div style={{ ...styles.page, textAlign: "center", paddingTop: "4rem" }}>
+      <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>⚠️</div>
+      <p style={{ color: "#f87171" }}>Failed to load your trips. Please check your connection.</p>
+    </div>
+  );
 
   return (
     <div style={styles.page}>
@@ -54,7 +66,7 @@ export default function Itineraries() {
       <div style={styles.header}>
         <div>
           <h1 style={styles.title}>MY <span style={{ color: "#ff6b00" }}>TRIPS</span></h1>
-          <p style={styles.subtitle}>{itineraries.length} itinerary{itineraries.length !== 1 ? "ies" : ""} saved</p>
+          <p style={styles.subtitle}>{itineraries.length} {itineraries.length !== 1 ? "itineraries" : "itinerary"} saved</p>
         </div>
         <button style={showForm ? styles.cancelBtn : styles.addBtn} onClick={() => setShowForm(!showForm)}>
           {showForm ? "✕ Cancel" : "+ New Itinerary"}
@@ -121,7 +133,7 @@ export default function Itineraries() {
                   <h3 style={styles.cardTitle}>{it.title}</h3>
                   <span style={styles.daysBadge}> {it.numberOfDays} Day{it.numberOfDays > 1 ? "s" : ""}</span>
                 </div>
-                <button onClick={() => handleDelete(it.id)} style={styles.deleteBtn}></button>
+                <button onClick={() => handleDelete(it.id)} style={styles.deleteBtn}>🗑️</button>
               </div>
               {it.description && <p style={styles.cardDesc}>{it.description}</p>}
               {it.placeIds?.length > 0 && (
