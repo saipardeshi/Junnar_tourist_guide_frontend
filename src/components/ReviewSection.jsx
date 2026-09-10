@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 import { getReviewsForPlace, addReview, deleteReview } from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
+// ✅ Defined OUTSIDE component so React doesn't remount it on every render
+function StarPicker({ value, onChange }) {
+  return (
+    <div style={{ display: "flex", gap: "0.3rem" }}>
+      {[1,2,3,4,5].map(star => (
+        <span
+          key={star}
+          onClick={() => onChange(star)}
+          style={{ fontSize: "1.4rem", cursor: "pointer", color: star <= value ? "#ff6b00" : "#333" }}
+        >★</span>
+      ))}
+    </div>
+  );
+}
+
 export default function ReviewSection({ placeId }) {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
@@ -35,17 +50,7 @@ export default function ReviewSection({ placeId }) {
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : null;
 
-  const StarPicker = ({ value, onChange }) => (
-    <div style={{ display: "flex", gap: "0.3rem" }}>
-      {[1,2,3,4,5].map(star => (
-        <span
-          key={star}
-          onClick={() => onChange(star)}
-          style={{ fontSize: "1.4rem", cursor: "pointer", color: star <= value ? "#ff6b00" : "#333" }}
-        >★</span>
-      ))}
-    </div>
-  );
+  // StarPicker is now defined above — removed from here
 
   return (
     <div style={styles.section}>
@@ -105,7 +110,8 @@ export default function ReviewSection({ placeId }) {
                 </div>
               </div>
               <p style={styles.comment}>{r.comment}</p>
-              {user && (
+              {/* ✅ Only show Delete for own reviews or admin users */}
+              {user && (user.name === r.userName || user.role === "ADMIN") && (
                 <button onClick={() => handleDelete(r.id)} style={styles.deleteBtn}>Delete</button>
               )}
             </div>

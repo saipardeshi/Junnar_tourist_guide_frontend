@@ -11,10 +11,12 @@ export default function AdminDashboard() {
   const [places, setPlaces] = useState([]);
   const [tab, setTab]       = useState("overview");
   const [loading, setLoading] = useState(true);
-  const [addForm, setAddForm] = useState({ name:"", description:"", category:[], location:"Junnar", imageUrl:"", rating:4.0, entryFee:"Free", timings:"", bestTimeToVisit:"", tags:"" });
+  const [addForm, setAddForm] = useState({ name:"", description:"", category:"Fort", location:"Junnar", imageUrl:"", rating:4.0, entryFee:"Free", timings:"", bestTimeToVisit:"", tags:"" });
+  const [crudError, setCrudError] = useState("");
 
   useEffect(() => {
     if (!user) { navigate("/login"); return; }
+    if (user.role !== "ADMIN") { navigate("/"); return; }  // ✅ role guard
     Promise.all([getAdminStats(), getAdminUsers(), getAllPlaces()])
       .then(([sRes, uRes, pRes]) => {
         setStats(sRes.data); setUsers(uRes.data); setPlaces(pRes.data);
@@ -25,16 +27,26 @@ export default function AdminDashboard() {
 
   const handleDeletePlace = async (id) => {
     if (!window.confirm("Delete this place?")) return;
-    await adminDeletePlace(id);
-    setPlaces(places.filter(p => p.id !== id));
+    try {
+      await adminDeletePlace(id);
+      setPlaces(places.filter(p => p.id !== id));
+      setCrudError("");
+    } catch {
+      setCrudError("Failed to delete place. Please try again.");
+    }
   };
 
   const handleAddPlace = async (e) => {
     e.preventDefault();
-    const payload = { ...addForm, tags: addForm.tags.split(",").map(t => t.trim()), rating: parseFloat(addForm.rating) };
-    const res = await adminAddPlace(payload);
-    setPlaces([...places, res.data]);
-    setAddForm({ name:"", description:"", category:"Fort", location:"Junnar", imageUrl:"", rating:4.0, entryFee:"Free", timings:"", bestTimeToVisit:"", tags:"" });
+    try {
+      const payload = { ...addForm, tags: addForm.tags.split(",").map(t => t.trim()), rating: parseFloat(addForm.rating) };
+      const res = await adminAddPlace(payload);
+      setPlaces([...places, res.data]);
+      setAddForm({ name:"", description:"", category:"Fort", location:"Junnar", imageUrl:"", rating:4.0, entryFee:"Free", timings:"", bestTimeToVisit:"", tags:"" });
+      setCrudError("");
+    } catch {
+      setCrudError("Failed to add place. Check all fields and try again.");
+    }
   };
 
   if (loading) return <div style={styles.loading}><div style={styles.spinner} /></div>;
@@ -47,6 +59,11 @@ export default function AdminDashboard() {
         <h1 style={styles.title}>ADMIN <span style={{ color: "#ff6b00" }}>DASHBOARD</span></h1>
         <span style={styles.adminBadge}>🔑 Admin</span>
       </div>
+      {crudError && (
+        <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171", padding: "0.75rem 1rem", borderRadius: "8px", marginBottom: "1rem", fontSize: "0.88rem" }}>
+          ⚠️ {crudError}
+        </div>
+      )}
 
       {/* Tabs */}
       <div style={styles.tabs}>

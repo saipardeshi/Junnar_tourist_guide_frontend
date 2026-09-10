@@ -55,8 +55,6 @@ export default function Hotels() {
   const getMealTab   = (id) => mealTab[id] || "breakfast";
   const setHotelMealTab = (id, tab) => setMealTab(prev => ({ ...prev, [id]: tab }));
 
-  const filtered = hotels;
-
   return (
     <div style={s.page}>
 
