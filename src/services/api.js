@@ -50,6 +50,9 @@ export const adminUpdatePlace  = (id, d) => API.put(`/admin/places/${id}`, d);
 export const adminDeletePlace  = (id)    => API.delete(`/admin/places/${id}`);
 export const adminDeleteReview = (id)    => API.delete(`/admin/reviews/${id}`);
 
+// CONTACT
+export const submitContact = (data) => API.post("/contact", data);
+
 // WEATHER (OpenWeatherMap free API)
 export const getWeather = () =>
   axios.get(
