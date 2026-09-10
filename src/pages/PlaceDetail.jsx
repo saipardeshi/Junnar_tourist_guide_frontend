@@ -19,7 +19,7 @@ function Lightbox({ images, startIndex, onClose }) {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [prev, next, onClose]);
 
   return (
     <div style={lb.overlay} onClick={onClose}>

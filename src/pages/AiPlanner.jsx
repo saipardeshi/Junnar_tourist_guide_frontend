@@ -75,6 +75,7 @@ export default function AiPlanner() {
   const [step, setStep]         = useState(1); // 1=style, 2=days, 3=places, 4=result
   const [allPlaces, setAllPlaces] = useState([]);
   const [loading, setLoading]   = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [style, setStyle]       = useState("");
   const [days, setDays]         = useState(2);
   const [selectedIds, setSelectedIds] = useState([]);
@@ -85,6 +86,7 @@ export default function AiPlanner() {
   useEffect(() => {
     getAllPlaces()
       .then(res => setAllPlaces(res.data))
+      .catch(() => setFetchError(true))
       .finally(() => setLoading(false));
   }, []);
 
@@ -230,6 +232,10 @@ export default function AiPlanner() {
           </div>
           {loading ? (
             <div style={{ color: "#555", textAlign: "center", padding: "2rem" }}>Loading places...</div>
+          ) : fetchError ? (
+            <div style={{ color: "#ef4444", textAlign: "center", padding: "2rem", fontSize: "0.9rem" }}>
+              ⚠️ Could not load places. Please check your connection and try again.
+            </div>
           ) : (
             <div className="ai-places-grid">
               {sortedPlaces.map(place => {
