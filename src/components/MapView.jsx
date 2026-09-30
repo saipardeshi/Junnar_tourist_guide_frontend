@@ -214,8 +214,8 @@ export default function MapView() {
       center: [19.22, 73.78], zoom: 10, zoomControl: false,
     });
     L.control.zoom({ position: "bottomright" }).addTo(mapInstance.current);
-    L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", {
-      attribution: '© <a href="https://stadiamaps.com">Stadia Maps</a> © <a href="https://openmaptiles.org">OpenMapTiles</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>', maxZoom: 20,
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 20,
     }).addTo(mapInstance.current);
 
     PLACES.forEach(place => {
@@ -533,8 +533,8 @@ function MobileMap({ places, selected, userPos, onSelect }) {
       center: [19.22, 73.78], zoom: 10, zoomControl: false,
     });
     L.control.zoom({ position: "bottomright" }).addTo(mapInstance.current);
-    L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", {
-      attribution: "© Stadia Maps © OpenMapTiles © OpenStreetMap", maxZoom: 20,
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 20,
     }).addTo(mapInstance.current);
 
     places.forEach(place => {
