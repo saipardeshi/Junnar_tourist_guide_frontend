@@ -6,7 +6,6 @@ const NAV_LINKS = [
   { path: "/",             label: "Home" },
   { path: "/places",       label: "Explore" },
   { path: "/map",          label: "Map" },
-  { path: "/experiences",  label: "Experiences" },
   { path: "/hotels",       label: "Hotels" },
   { path: "/ai-planner",   label: "AI Planner" },
   { path: "/cost",         label: "Budget" },

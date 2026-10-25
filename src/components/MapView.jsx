@@ -214,9 +214,10 @@ export default function MapView() {
       center: [19.22, 73.78], zoom: 10, zoomControl: false,
     });
     L.control.zoom({ position: "bottomright" }).addTo(mapInstance.current);
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>', maxZoom: 20,
-    }).addTo(mapInstance.current);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19,
+}).addTo(mapInstance.current);
 
     PLACES.forEach(place => {
       const color  = CATEGORIES[place.category]?.color || "#ff6b00";
