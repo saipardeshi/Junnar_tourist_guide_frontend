@@ -155,7 +155,9 @@ function HotelCard({ hotel, isExpanded, onToggle, mealTab, onMealTab }) {
         </span>
 
         {/* Rating */}
-        <span style={s.ratingBadge}>{hotel.rating}</span>
+        <span style={s.ratingBadge}>
+          <span style={{ color: "#facc15" }}>★</span> {hotel.rating}
+        </span>
       </div>
 
       {/* ── Card Body ── */}
@@ -336,7 +338,7 @@ const s = {
   imgPlaceholder: { width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#161616" },
   imgArrow:   { position: "absolute", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "none", color: "#fff", width: "30px", height: "30px", borderRadius: "50%", fontSize: "16px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 },
   badge:      { position: "absolute", top: "10px", left: "10px", padding: "0.2rem 0.7rem", borderRadius: "4px", fontSize: "0.7rem", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" },
-  ratingBadge:{ position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.7)", color: "#fff", padding: "0.2rem 0.6rem", borderRadius: "4px", fontSize: "0.75rem", fontWeight: "700" },
+  ratingBadge:{ position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.75)", color: "#fff", padding: "0.25rem 0.7rem", borderRadius: "6px", fontSize: "0.78rem", fontWeight: "700", display: "flex", alignItems: "center", gap: "4px", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.08)" },
 
   body:       { padding: "1.2rem" },
   name:       { color: "#fff", fontSize: "1.1rem", fontWeight: "700", marginBottom: "0.3rem" },
