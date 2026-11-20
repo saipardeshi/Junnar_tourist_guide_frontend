@@ -10,13 +10,14 @@ L.Icon.Default.mergeOptions({
 });
 
 const CATEGORIES = {
-  all:     { label: "All",     color: "#ff6b00" },
-  fort:    { label: "Forts",   color: "#e05252" },
-  temple:  { label: "Temples", color: "#f5a623" },
-  cave:    { label: "Caves",   color: "#9b59b6" },
-  nature:  { label: "Nature",  color: "#27ae60" },
-  dam:     { label: "Dams",    color: "#2980b9" },
-  other:   { label: "Other",   color: "#ff6b00" },
+  all:      { label: "All",      color: "#ff6b00" },
+  fort:     { label: "Forts",    color: "#e05252" },
+  temple:   { label: "Temples",  color: "#f5a623" },
+  cave:     { label: "Caves",    color: "#9b59b6" },
+  nature:   { label: "Nature",   color: "#27ae60" },
+  dam:      { label: "Dams",     color: "#2980b9" },
+  heritage: { label: "Heritage", color: "#ec4899" },
+  other:    { label: "Other",    color: "#ff6b00" },
 };
 
 const PLACES = [
@@ -43,7 +44,13 @@ const PLACES = [
   { name: "Yedgaon Dam",               lat: 19.2900, lng: 73.9200, emoji: "💧", category: "dam",    desc: "Scenic dam near Junnar" },
   { name: "Dimbhe Dam",                lat: 19.1200, lng: 73.7500, emoji: "💧", category: "dam",    desc: "Major dam in Ambegaon with Sahyadri views" },
   { name: "Chilewadi Dam",             lat: 19.1800, lng: 73.8000, emoji: "💧", category: "dam",    desc: "Smaller dam in the Junnar-Ambegaon region" },
-  { name: "Shiv Shrusti",              lat: 19.2080, lng: 73.8780, emoji: "🎭", category: "other",  desc: "Immersive Chhatrapati Shivaji Maharaj theme park" },
+  { name: "Shiv Shrusti",              lat: 19.2080, lng: 73.8780, emoji: "🎭", category: "other",    desc: "Immersive Chhatrapati Shivaji Maharaj theme park" },
+  // ── NEW PLACES ────────────────────────────────────────────────────────────
+  { name: "Narayangad Fort",                                    lat: 19.2828, lng: 74.0323, emoji: "🏯", category: "fort",     desc: "Hill fort with plateau views near Narayangaon" },
+  { name: "Giant Metrewave Radio Telescope (GMRT), Khodad",    lat: 19.0965, lng: 74.0497, emoji: "📡", category: "nature",   desc: "World-class radio telescope array at Khodad" },
+  { name: "Manikdoh Leopard Rescue Centre",                     lat: 19.2410, lng: 73.8160, emoji: "🐆", category: "nature",   desc: "Leopard rescue and rehabilitation centre" },
+  { name: "Habashi Gumbad",                                     lat: 19.1961, lng: 73.8985, emoji: "🕌", category: "heritage", desc: "Historic domed tomb from the Nizamshahi era" },
+  { name: "Ambe Hatvij",                                        lat: 19.2500, lng: 73.7000, emoji: "⛰️", category: "nature",   desc: "Scenic Sahyadri hill village with monsoon views" },
 ];
 
 // ── Haversine distance in km ──────────────────────────────────────────────────

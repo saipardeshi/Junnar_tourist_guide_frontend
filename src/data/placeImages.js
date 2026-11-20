@@ -156,6 +156,26 @@ export const PLACE_IMAGES = {
     "/img/chilewadi_2.jpeg",
     "/img/chilewadi_3.jpeg",
   ],
+  "Narayangad Fort": [
+    "/img/narayangad_1.jpg",
+    "/img/narayangad_2.jpg",
+  ],
+  "Giant Metrewave Radio Telescope (GMRT), Khodad": [
+    "/img/gmrt_1.jpg",
+    "/img/gmrt_2.jpg",
+  ],
+  "Manikdoh Leopard Rescue Centre": [
+    "/img/manikdoh_1.jpg",
+    "/img/manikdoh_2.jpg",
+  ],
+  "Habashi Gumbad": [
+    "/img/habashi_gumbad_1.jpg",
+    "/img/habashi_gumbad_2.jpg",
+  ],
+  "Ambe Hatvij": [
+    "/img/ambe_hatvij_1.jpg",
+    "/img/ambe_hatvij_2.jpg",
+  ],
 };
 
 // ── Keyword aliases ───────────────────────────────────────────────────────────
@@ -171,6 +191,8 @@ const ALIASES = {
   "hanumantgad":      "Nimgiri & Hanumantgad",
   "hadsar":           "Hadsar Fort",
   "habashi":          "Habashi Mahal",
+  "habashi gumbad":   "Habashi Gumbad",
+  "gumbad":           "Habashi Gumbad",
   "shiv shrusti":     "Shiv Shrusti",
   "shivshrusti":      "Shiv Shrusti",
   "ozar":             "Ozar Ganpati Temple",
@@ -185,11 +207,18 @@ const ALIASES = {
   "malshej":          "Malshej Ghat",
   "daryaghat":        "Daryaghat",
   "manikdoh":         "Manikdoh Dam",
+  "manikdoh leopard": "Manikdoh Leopard Rescue Centre",
+  "leopard":          "Manikdoh Leopard Rescue Centre",
+  "leopard rescue":   "Manikdoh Leopard Rescue Centre",
   "wadaj":            "Wadaj Dam",
   "pimpalgaon":       "Pimpalgaon Joge Dam",
   "yedgaon":          "Yedgaon Dam",
   "dimbhe":           "Dimbhe Dam",
   "chilewadi":        "Chilewadi Dam",
+  "narayangad":       "Narayangad Fort",
+  "gmrt":             "Giant Metrewave Radio Telescope (GMRT), Khodad",
+  "ambe":             "Ambe Hatvij",
+  "hatvij":           "Ambe Hatvij",
 };
 
 /**
