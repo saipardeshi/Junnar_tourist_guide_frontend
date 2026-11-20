@@ -63,7 +63,9 @@ export default function Places() {
       {/* Header */}
       <div style={styles.header}>
         <h1 style={styles.title}>EXPLORE <span style={{ color: "#ff6b00" }}>JUNNAR</span></h1>
-        <p style={styles.subtitle}>{places.length} incredible destinations</p>
+        <p style={styles.subtitle}>
+          {loading && places.length === 0 ? "20+" : places.length >= 20 ? "20+" : places.length} incredible destination{places.length === 1 ? "" : "s"}
+        </p>
       </div>
 
       {/* Search */}
