@@ -20,6 +20,8 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent]   = useState(false);
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const validate = () => {
     const e = {};
@@ -36,12 +38,23 @@ export default function Contact() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setErrors({});
+    setSubmitError("");
+    setSubmitting(true);
     try {
-      await submitContact(form);  // ✅ real API call
-    } catch {
-      // Fallback: show success even if API unavailable (e.g. backend offline)
+      await submitContact(form);
+      setSent(true);
+    } catch (err) {
+      // Don't pretend the message was delivered when it wasn't.
+      const apiMessage = err?.response?.data?.error;
+      setSubmitError(
+        apiMessage ||
+        (err?.response
+          ? "Something went wrong sending your message. Please try again."
+          : "Couldn't reach the server (it may be waking up). Please try again in a moment, or email us directly.")
+      );
+    } finally {
+      setSubmitting(false);
     }
-    setSent(true);
   };
 
 
@@ -107,7 +120,10 @@ export default function Contact() {
                   placeholder="Tell us how we can help..."
                   value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
               </Field>
-              <button type="submit" style={S.primaryBtn}>Send Message →</button>
+              {submitError && <p role="alert" style={{ ...S.errorMsg, fontSize: "0.82rem", marginBottom: "0.5rem" }}>{submitError}</p>}
+              <button type="submit" style={{ ...S.primaryBtn, opacity: submitting ? 0.6 : 1, cursor: submitting ? "not-allowed" : "pointer" }} disabled={submitting}>
+                {submitting ? "Sending..." : "Send Message →"}
+              </button>
             </form>
           )}
         </div>

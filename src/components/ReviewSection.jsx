@@ -111,7 +111,7 @@ export default function ReviewSection({ placeId }) {
               </div>
               <p style={styles.comment}>{r.comment}</p>
               {/* ✅ Only show Delete for own reviews or admin users */}
-              {user && (user.name === r.userName || user.role === "ADMIN") && (
+              {user && ((user.userId && user.userId === r.userId) || user.role === "ADMIN") && (
                 <button onClick={() => handleDelete(r.id)} style={styles.deleteBtn}>Delete</button>
               )}
             </div>
