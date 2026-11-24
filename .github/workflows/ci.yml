@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm test
+
+      # Plain `vite build`, not `npm run build`: the latter also regenerates the sitemap by
+      # calling the live production API, which CI shouldn't depend on.
+      - name: Production build
+        run: npx vite build
+
+      # Not a gate yet: ESLint currently reports pre-existing react-hooks errors (e.g. Places.jsx).
+      # Fix those, then delete `continue-on-error` to make lint blocking.
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true

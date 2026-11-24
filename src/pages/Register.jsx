@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { errorMessage } from "../utils/errors";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -18,7 +19,7 @@ export default function Register() {
       await register(form.name, form.email, form.password);
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.error || "Registration failed. Try again.");
+      setError(errorMessage(err, "Registration failed. Try again."));
     } finally {
       setLoading(false);
     }

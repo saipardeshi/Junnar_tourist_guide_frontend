@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8080/api"
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8080/api",
+  // Render's free tier needs up to ~50s to wake from sleep. Without a timeout a request to a
+  // sleeping or unreachable server leaves buttons spinning forever ("Creating account...").
+  timeout: 60000,
 });
 
 API.interceptors.request.use((config) => {
@@ -53,8 +56,7 @@ export const adminDeleteReview = (id)    => API.delete(`/admin/reviews/${id}`);
 // CONTACT
 export const submitContact = (data) => API.post("/contact", data);
 
-// WEATHER (OpenWeatherMap free API)
-export const getWeather = () =>
-  axios.get(
-    `https://api.openweathermap.org/data/2.5/weather?q=Junnar,IN&appid=${import.meta.env.VITE_WEATHER_KEY}&units=metric`
-  );
+// WEATHER — proxied by the backend so the OpenWeatherMap key never reaches the browser
+export const getWeather = () => API.get("/weather");
+
+export { API };
